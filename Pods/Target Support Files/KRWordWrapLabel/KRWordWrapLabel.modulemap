@@ -1,0 +1,6 @@
+framework module KRWordWrapLabel {
+  umbrella header "KRWordWrapLabel-umbrella.h"
+
+  export *
+  module * { export * }
+}
