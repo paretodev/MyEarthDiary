@@ -52,9 +52,15 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>이 앱의 주요 기능은 위치 기반으로 진행됩니다.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>사진을 찍어서 올리시려면, 카메라 접근을 허용해주세요.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>사진을 앨범에서 선택해서 올리시려면, 앨범에 접근을 허용해주세요.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>동영상을 올리시려면, 마이크 접근을 허용해주세요.</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

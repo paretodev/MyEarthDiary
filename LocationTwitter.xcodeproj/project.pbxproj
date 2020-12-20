@@ -3,29 +3,59 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C08E1E925853B5B001A9DC8 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C08E1E825853B5B001A9DC8 /* CategoryPicker.swift */; };
+		1C28C475258643F9004E477D /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28C474258643F9004E477D /* UIImage+Resize.swift */; };
 		1C3D48D425848DB600561692 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3D48D325848DB600561692 /* AppDelegate.swift */; };
 		1C3D48D625848DB600561692 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3D48D525848DB600561692 /* SceneDelegate.swift */; };
-		1C3D48D825848DB600561692 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3D48D725848DB600561692 /* ViewController.swift */; };
 		1C3D48DB25848DB600561692 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C3D48D925848DB600561692 /* Main.storyboard */; };
 		1C3D48DE25848DB600561692 /* LocationTwitter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1C3D48DC25848DB600561692 /* LocationTwitter.xcdatamodeld */; };
 		1C3D48E025848DBB00561692 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C3D48DF25848DBB00561692 /* Assets.xcassets */; };
 		1C3D48E325848DBB00561692 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C3D48E125848DBB00561692 /* LaunchScreen.storyboard */; };
+		1C3D48EE25848EE200561692 /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3D48ED25848EE200561692 /* CurrentLocationViewController.swift */; };
+		1C3D48F625849A7000561692 /* UniversalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3D48F325849A7000561692 /* UniversalFunctions.swift */; };
+		1C3D48F725849A7000561692 /* String+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3D48F425849A7000561692 /* String+Add.swift */; };
+		1C3D48F825849A7000561692 /* CurrentLocationStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3D48F525849A7000561692 /* CurrentLocationStates.swift */; };
+		1C3D48FE25849D8400561692 /* succeed.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C3D48FD25849D8400561692 /* succeed.caf */; };
+		1C5D8AC8258DBDF000460773 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5D8AC7258DBDF000460773 /* File.swift */; };
+		1C5FAD45258E1FE5004A70F6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5FAD44258E1FE5004A70F6 /* MapViewController.swift */; };
+		1C81DF882584F061001AB0FA /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C81DF872584F061001AB0FA /* LocationDetailViewController.swift */; };
+		1CCE3F7C258AED7A00DB49B5 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE3F7B258AED7A00DB49B5 /* LocationCell.swift */; };
+		1CECE8C6258A57BF0014BEAC /* VisitedLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CECE8C5258A57BF0014BEAC /* VisitedLocationsViewController.swift */; };
+		1CEDAFE125885BD500CCDBA8 /* Location+CoreDataProperties copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEDAFDF25885BD300CCDBA8 /* Location+CoreDataProperties copy.swift */; };
+		1CEDAFE225885BD500CCDBA8 /* Location+CoreDataClass copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CEDAFE025885BD500CCDBA8 /* Location+CoreDataClass copy.swift */; };
+		3B8C789A9CF628FCF8BBD6F2 /* Pods_LocationTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596C21F2F795A55FAE347870 /* Pods_LocationTwitter.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C08E1E825853B5B001A9DC8 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
+		1C28C474258643F9004E477D /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		1C3D48D025848DB600561692 /* LocationTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C3D48D325848DB600561692 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C3D48D525848DB600561692 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1C3D48D725848DB600561692 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1C3D48DA25848DB600561692 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1C3D48DD25848DB600561692 /* LocationTwitter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocationTwitter.xcdatamodel; sourceTree = "<group>"; };
 		1C3D48DF25848DBB00561692 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1C3D48E225848DBB00561692 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1C3D48E425848DBB00561692 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C3D48ED25848EE200561692 /* CurrentLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewController.swift; sourceTree = "<group>"; };
+		1C3D48F325849A7000561692 /* UniversalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniversalFunctions.swift; sourceTree = "<group>"; };
+		1C3D48F425849A7000561692 /* String+Add.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Add.swift"; sourceTree = "<group>"; };
+		1C3D48F525849A7000561692 /* CurrentLocationStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationStates.swift; sourceTree = "<group>"; };
+		1C3D48FD25849D8400561692 /* succeed.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = succeed.caf; sourceTree = "<group>"; };
+		1C5D8AC7258DBDF000460773 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		1C5FAD44258E1FE5004A70F6 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		1C81DF872584F061001AB0FA /* LocationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
+		1CCE3F7B258AED7A00DB49B5 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		1CECE8C5258A57BF0014BEAC /* VisitedLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedLocationsViewController.swift; sourceTree = "<group>"; };
+		1CEDAFDF25885BD300CCDBA8 /* Location+CoreDataProperties copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties copy.swift"; sourceTree = "<group>"; };
+		1CEDAFE025885BD500CCDBA8 /* Location+CoreDataClass copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass copy.swift"; sourceTree = "<group>"; };
+		596C21F2F795A55FAE347870 /* Pods_LocationTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LocationTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FDDAEE485603E5E3786A801 /* Pods-LocationTwitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocationTwitter.debug.xcconfig"; path = "Target Support Files/Pods-LocationTwitter/Pods-LocationTwitter.debug.xcconfig"; sourceTree = "<group>"; };
+		F446B93D1A982A6B72BE5E2C /* Pods-LocationTwitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocationTwitter.release.xcconfig"; path = "Target Support Files/Pods-LocationTwitter/Pods-LocationTwitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B8C789A9CF628FCF8BBD6F2 /* Pods_LocationTwitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,8 +73,12 @@
 		1C3D48C725848DB600561692 = {
 			isa = PBXGroup;
 			children = (
+				1CEDAFDF25885BD300CCDBA8 /* Location+CoreDataProperties copy.swift */,
+				1CEDAFE025885BD500CCDBA8 /* Location+CoreDataClass copy.swift */,
 				1C3D48D225848DB600561692 /* LocationTwitter */,
 				1C3D48D125848DB600561692 /* Products */,
+				5BB9D554C19B9D0713C4465A /* Pods */,
+				4656CDACC1F348D7F4FA12EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,16 +93,60 @@
 		1C3D48D225848DB600561692 /* LocationTwitter */ = {
 			isa = PBXGroup;
 			children = (
+				1C3D48D925848DB600561692 /* Main.storyboard */,
 				1C3D48D325848DB600561692 /* AppDelegate.swift */,
 				1C3D48D525848DB600561692 /* SceneDelegate.swift */,
-				1C3D48D725848DB600561692 /* ViewController.swift */,
-				1C3D48D925848DB600561692 /* Main.storyboard */,
+				1C3D48ED25848EE200561692 /* CurrentLocationViewController.swift */,
+				1C81DF872584F061001AB0FA /* LocationDetailViewController.swift */,
+				1CECE8C5258A57BF0014BEAC /* VisitedLocationsViewController.swift */,
+				1CCE3F7B258AED7A00DB49B5 /* LocationCell.swift */,
+				1C08E1E825853B5B001A9DC8 /* CategoryPicker.swift */,
+				1C5FAD44258E1FE5004A70F6 /* MapViewController.swift */,
 				1C3D48DF25848DBB00561692 /* Assets.xcassets */,
 				1C3D48E125848DBB00561692 /* LaunchScreen.storyboard */,
 				1C3D48E425848DBB00561692 /* Info.plist */,
 				1C3D48DC25848DB600561692 /* LocationTwitter.xcdatamodeld */,
+				1C3D48F225849A7000561692 /* Gadgets */,
+				1C3D48FC25849D8400561692 /* Sound */,
+				1C5D8AC7258DBDF000460773 /* File.swift */,
 			);
 			path = LocationTwitter;
+			sourceTree = "<group>";
+		};
+		1C3D48F225849A7000561692 /* Gadgets */ = {
+			isa = PBXGroup;
+			children = (
+				1C28C474258643F9004E477D /* UIImage+Resize.swift */,
+				1C3D48F425849A7000561692 /* String+Add.swift */,
+				1C3D48F325849A7000561692 /* UniversalFunctions.swift */,
+				1C3D48F525849A7000561692 /* CurrentLocationStates.swift */,
+			);
+			path = Gadgets;
+			sourceTree = "<group>";
+		};
+		1C3D48FC25849D8400561692 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				1C3D48FD25849D8400561692 /* succeed.caf */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
+		4656CDACC1F348D7F4FA12EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				596C21F2F795A55FAE347870 /* Pods_LocationTwitter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5BB9D554C19B9D0713C4465A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9FDDAEE485603E5E3786A801 /* Pods-LocationTwitter.debug.xcconfig */,
+				F446B93D1A982A6B72BE5E2C /* Pods-LocationTwitter.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +156,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1C3D48E725848DBB00561692 /* Build configuration list for PBXNativeTarget "LocationTwitter" */;
 			buildPhases = (
+				193F57FE2128577053701801 /* [CP] Check Pods Manifest.lock */,
 				1C3D48CC25848DB600561692 /* Sources */,
 				1C3D48CD25848DB600561692 /* Frameworks */,
 				1C3D48CE25848DB600561692 /* Resources */,
+				9A43F90CE3063DD63FFDB7B0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,20 +211,75 @@
 				1C3D48E325848DBB00561692 /* LaunchScreen.storyboard in Resources */,
 				1C3D48E025848DBB00561692 /* Assets.xcassets in Resources */,
 				1C3D48DB25848DB600561692 /* Main.storyboard in Resources */,
+				1C3D48FE25849D8400561692 /* succeed.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		193F57FE2128577053701801 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LocationTwitter-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9A43F90CE3063DD63FFDB7B0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LocationTwitter/Pods-LocationTwitter-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LocationTwitter/Pods-LocationTwitter-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LocationTwitter/Pods-LocationTwitter-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1C3D48CC25848DB600561692 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C81DF882584F061001AB0FA /* LocationDetailViewController.swift in Sources */,
+				1CECE8C6258A57BF0014BEAC /* VisitedLocationsViewController.swift in Sources */,
+				1C3D48F725849A7000561692 /* String+Add.swift in Sources */,
+				1C08E1E925853B5B001A9DC8 /* CategoryPicker.swift in Sources */,
+				1CCE3F7C258AED7A00DB49B5 /* LocationCell.swift in Sources */,
+				1C28C475258643F9004E477D /* UIImage+Resize.swift in Sources */,
+				1CEDAFE225885BD500CCDBA8 /* Location+CoreDataClass copy.swift in Sources */,
 				1C3D48DE25848DB600561692 /* LocationTwitter.xcdatamodeld in Sources */,
-				1C3D48D825848DB600561692 /* ViewController.swift in Sources */,
+				1C3D48EE25848EE200561692 /* CurrentLocationViewController.swift in Sources */,
 				1C3D48D425848DB600561692 /* AppDelegate.swift in Sources */,
+				1C5D8AC8258DBDF000460773 /* File.swift in Sources */,
 				1C3D48D625848DB600561692 /* SceneDelegate.swift in Sources */,
+				1C3D48F825849A7000561692 /* CurrentLocationStates.swift in Sources */,
+				1C3D48F625849A7000561692 /* UniversalFunctions.swift in Sources */,
+				1CEDAFE125885BD500CCDBA8 /* Location+CoreDataProperties copy.swift in Sources */,
+				1C5FAD45258E1FE5004A70F6 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +356,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -275,7 +411,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -287,12 +423,14 @@
 		};
 		1C3D48E825848DBB00561692 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FDDAEE485603E5E3786A801 /* Pods-LocationTwitter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WY29973PQ7;
 				INFOPLIST_FILE = LocationTwitter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -300,18 +438,20 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sos.LocationTwitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		1C3D48E925848DBB00561692 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F446B93D1A982A6B72BE5E2C /* Pods-LocationTwitter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WY29973PQ7;
 				INFOPLIST_FILE = LocationTwitter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -319,7 +459,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sos.LocationTwitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
