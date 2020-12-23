@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1C3D48CF25848DB600561692"
-               BuildableName = "LocationTwitter.app"
-               BlueprintName = "LocationTwitter"
-               ReferencedContainer = "container:LocationTwitter.xcodeproj">
+               BuildableName = "MyEarthDiary.app"
+               BlueprintName = "MyEarthDiary"
+               ReferencedContainer = "container:MyEarthDiary.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1C3D48CF25848DB600561692"
-            BuildableName = "LocationTwitter.app"
-            BlueprintName = "LocationTwitter"
-            ReferencedContainer = "container:LocationTwitter.xcodeproj">
+            BuildableName = "MyEarthDiary.app"
+            BlueprintName = "MyEarthDiary"
+            ReferencedContainer = "container:MyEarthDiary.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1C3D48CF25848DB600561692"
-            BuildableName = "LocationTwitter.app"
-            BlueprintName = "LocationTwitter"
-            ReferencedContainer = "container:LocationTwitter.xcodeproj">
+            BuildableName = "MyEarthDiary.app"
+            BlueprintName = "MyEarthDiary"
+            ReferencedContainer = "container:MyEarthDiary.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

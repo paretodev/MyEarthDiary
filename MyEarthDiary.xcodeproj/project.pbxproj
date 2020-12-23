@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		1C08E1E825853B5B001A9DC8 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
 		1C28C474258643F9004E477D /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
-		1C3D48D025848DB600561692 /* LocationTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C3D48D025848DB600561692 /* MyEarthDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyEarthDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C3D48D325848DB600561692 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C3D48D525848DB600561692 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1C3D48DA25848DB600561692 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 		1C3D48D125848DB600561692 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1C3D48D025848DB600561692 /* LocationTwitter.app */,
+				1C3D48D025848DB600561692 /* MyEarthDiary.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -190,9 +190,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1C3D48CF25848DB600561692 /* LocationTwitter */ = {
+		1C3D48CF25848DB600561692 /* MyEarthDiary */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1C3D48E725848DBB00561692 /* Build configuration list for PBXNativeTarget "LocationTwitter" */;
+			buildConfigurationList = 1C3D48E725848DBB00561692 /* Build configuration list for PBXNativeTarget "MyEarthDiary" */;
 			buildPhases = (
 				193F57FE2128577053701801 /* [CP] Check Pods Manifest.lock */,
 				1C3D48CC25848DB600561692 /* Sources */,
@@ -204,9 +204,9 @@
 			);
 			dependencies = (
 			);
-			name = LocationTwitter;
+			name = MyEarthDiary;
 			productName = LocationTwitter;
-			productReference = 1C3D48D025848DB600561692 /* LocationTwitter.app */;
+			productReference = 1C3D48D025848DB600561692 /* MyEarthDiary.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -223,7 +223,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1C3D48CB25848DB600561692 /* Build configuration list for PBXProject "LocationTwitter" */;
+			buildConfigurationList = 1C3D48CB25848DB600561692 /* Build configuration list for PBXProject "MyEarthDiary" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -237,7 +237,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1C3D48CF25848DB600561692 /* LocationTwitter */,
+				1C3D48CF25848DB600561692 /* MyEarthDiary */,
 			);
 		};
 /* End PBXProject section */
@@ -531,7 +531,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1C3D48CB25848DB600561692 /* Build configuration list for PBXProject "LocationTwitter" */ = {
+		1C3D48CB25848DB600561692 /* Build configuration list for PBXProject "MyEarthDiary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1C3D48E525848DBB00561692 /* Debug */,
@@ -540,7 +540,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1C3D48E725848DBB00561692 /* Build configuration list for PBXNativeTarget "LocationTwitter" */ = {
+		1C3D48E725848DBB00561692 /* Build configuration list for PBXNativeTarget "MyEarthDiary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1C3D48E825848DBB00561692 /* Debug */,
