@@ -1,0 +1,103 @@
+
+/* Class = "UILabel"; text = "경도"; ObjectID = "0DN-dK-bwZ"; */
+"0DN-dK-bwZ.text" = "경도";
+
+/* Class = "UITabBarItem"; title = "내가 가본 곳들"; ObjectID = "3Mm-uq-VS8"; */
+"3Mm-uq-VS8.title" = "내가 가본 곳들";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "3sO-bH-OhH"; */
+"3sO-bH-OhH.text" = "라벨";
+
+/* Class = "UINavigationItem"; title = "내가 가본 곳들"; ObjectID = "6fO-4y-hgY"; */
+"6fO-4y-hgY.title" = "내가 가본 곳들";
+
+/* Class = "UINavigationItem"; title = "내 위치 태그"; ObjectID = "7g0-R5-XeY"; */
+"7g0-R5-XeY.title" = "내 위치 태그";
+
+/* Class = "UIButton"; normalTitle = "이 장소에 트윗"; ObjectID = "A4N-dz-JfN"; */
+"A4N-dz-JfN.normalTitle" = "이 장소에 트윗✏️";
+
+/* Class = "UILabel"; text = "장소 이름"; ObjectID = "FVx-nh-eoJ"; */
+"FVx-nh-eoJ.text" = "장소 이름";
+
+/* Class = "UINavigationItem"; title = "내 여행 경로"; ObjectID = "GXs-Cs-6zs"; */
+"GXs-Cs-6zs.title" = "내 여행 경로";
+
+/* Class = "UILabel"; text = "장소 이름"; ObjectID = "N3y-6r-Mpm"; */
+"N3y-6r-Mpm.text" = "장소 이름";
+
+/* Class = "UILabel"; text = "( 검색된 주소)"; ObjectID = "QeL-vr-9eC"; */
+"QeL-vr-9eC.text" = "( 검색된 주소)";
+
+/* Class = "UILabel"; text = "위도"; ObjectID = "Tb9-Jl-Cem"; */
+"Tb9-Jl-Cem.text" = "위도";
+
+/* Class = "UILabel"; text = "( 검색된 값 없음 )"; ObjectID = "UKP-dz-2fX"; */
+"UKP-dz-2fX.text" = "( 검색된 값 없음 )";
+
+/* Class = "UIBarButtonItem"; title = "내 위치로"; ObjectID = "Utx-41-BUe"; */
+"Utx-41-BUe.title" = "내 위치로";
+
+/* Class = "UITableViewSection"; headerTitle = "이 장소 트윗"; ObjectID = "VUb-eo-r6r"; */
+"VUb-eo-r6r.headerTitle" = "이 장소 트윗";
+
+/* Class = "UIButton"; normalTitle = "내 위치 잡기"; ObjectID = "WF0-R0-vht"; */
+"WF0-R0-vht.normalTitle" = "내 위치 잡기";
+
+/* Class = "UIBarButtonItem"; title = "뒤로"; ObjectID = "WUT-Su-xA7"; */
+"WUT-Su-xA7.title" = "뒤로";
+
+/* Class = "UIBarButtonItem"; title = "취소"; ObjectID = "XJo-4D-mOS"; */
+"XJo-4D-mOS.title" = "취소";
+
+/* Class = "UITabBarItem"; title = "내 위치 태그"; ObjectID = "XdK-rA-Zt4"; */
+"XdK-rA-Zt4.title" = "내 위치 태그";
+
+/* Class = "UILabel"; text = "이 장소에 사진/영상 추가"; ObjectID = "aUa-tC-sNd"; */
+"aUa-tC-sNd.text" = "이 장소에 사진/영상 추가";
+
+/* Class = "UITextView"; text = "이 장소 트윗"; ObjectID = "aXg-3N-iwy"; */
+"aXg-3N-iwy.text" = "이 장소 트윗";
+
+/* Class = "UITextField"; placeholder = "이 장소의 이름을 적어주세요"; ObjectID = "awW-mn-wj1"; */
+"awW-mn-wj1.placeholder" = "이 장소의 이름을 적어주세요";
+
+/* Class = "UILabel"; text = "( 유저에게 보낼 메세지 )"; ObjectID = "fHJ-gZ-DWb"; */
+"fHJ-gZ-DWb.text" = "( 유저 메세지 )";
+
+/* Class = "UILabel"; text = "카테고리"; ObjectID = "hRr-UB-3dR"; */
+"hRr-UB-3dR.text" = "카테고리";
+
+/* Class = "UIBarButtonItem"; title = "경로 기준"; ObjectID = "kmG-tC-i9O"; */
+"kmG-tC-i9O.title" = "경로 기준";
+
+/* Class = "UIViewController"; title = "내 위치 태그"; ObjectID = "rNb-Yw-bge"; */
+"rNb-Yw-bge.title" = "내 위치 태그";
+
+/* Class = "UIBarButtonItem"; title = "완료"; ObjectID = "re7-g3-PDe"; */
+"re7-g3-PDe.title" = "완료";
+
+/* Class = "UILabel"; text = "날짜"; ObjectID = "rvn-9f-jEN"; */
+"rvn-9f-jEN.text" = "날짜";
+
+/* Class = "UILabel"; text = "없음"; ObjectID = "uLz-Kn-sgZ"; */
+"uLz-Kn-sgZ.text" = "없음";
+
+/* Class = "UINavigationItem"; title = "새로운 장소 추가"; ObjectID = "um2-jk-YGU"; */
+"um2-jk-YGU.title" = "새로운 장소 추가";
+
+/* Class = "UITableViewSection"; headerTitle = "갤러리"; ObjectID = "vbX-Wz-B0I"; */
+"vbX-Wz-B0I.headerTitle" = "갤러리";
+
+/* Class = "UITabBarItem"; title = "여행 경로"; ObjectID = "wF5-Iz-V1a"; */
+"wF5-Iz-V1a.title" = "내 지구에 내 트윗들";
+
+/* Class = "UILabel"; text = "날짜"; ObjectID = "wUH-py-vfr"; */
+"wUH-py-vfr.text" = "날짜";
+
+/* Class = "UILabel"; text = "주소"; ObjectID = "xhH-1U-6Tz"; */
+"xhH-1U-6Tz.text" = "주소";
+
+/* Class = "UILabel"; text = "( 검색된 값 없음 )"; ObjectID = "yEY-kT-2A8"; */
+"yEY-kT-2A8.text" = "( 검색된 값 없음 )";
+

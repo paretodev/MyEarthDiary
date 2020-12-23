@@ -4,12 +4,10 @@
 //
 //  Created by 한석희 on 12/15/20.
 //
-//
 
 import Foundation
 import CoreData
 import CoreLocation
-
 
 extension Location {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Location> {

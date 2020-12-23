@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  LocationTwitter
+  Created by 한석희 on 12/23/20.
+*/
+
+"CFBundleDisplayName" = "MyEarthDiary";
+"NSLocationWhenInUseUsageDescription" = "이 앱의 주요 기능은 위치 기반으로 진행됩니다." ;
+"NSCameraUsageDescription" = "사진을 찍어서 올리시려면, 카메라 접근을 허용해주세요." ;
+"NSPhotoLibraryUsageDescription" = "사진을 앨범에서 선택해서 올리시려면, 앨범접근을 허용해주세요." ;
+"CFBundleDisplayName" = "MyEarthDiary";
