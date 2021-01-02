@@ -58,6 +58,12 @@ class LocationDetailViewController: UITableViewController {
     @IBOutlet weak var labelNamedAdress: UILabel!
     var kAddressLabel : KRWordWrapLabel?
     
+    
+//    //Cycle inside LocationTwitter; building could produce unreliable results.
+//    Cycle details:
+//    → Target 'LocationTwitter': CodeSign /Users/sucky/Library/Developer/Xcode/DerivedData/MyEarthDiary-avkcpjjgscrgfzewmkhqibqxykhw/Build/Products/Debug-iphoneos/LocationTwitter.app
+//    ○ Target 'LocationTwitter' has copy command from '/Users/sucky/Library/Developer/Xcode/DerivedData/MyEarthDiary-avkcpjjgscrgfzewmkhqibqxykhw/Build/Products/Debug-iphoneos/LocationTwitter.app' to '/Users/sucky/Library/Developer/Xcode/DerivedData/MyEarthDiary-avkcpjjgscrgfzewmkhqibqxykhw/Build/Products/Debug-iphoneos/LocationTwitter.app/LocationTwitter.app'
+//    //
     //MARK: - Initail Set up
     override func viewDidLoad() {
 //        print("LocatoinDetailVC view did load executed.")
