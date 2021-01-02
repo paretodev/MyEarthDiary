@@ -4,8 +4,7 @@
   Created by 한석희 on 12/23/20.
 */
 
-"NSLocationWhenInUseUsageDescription" = "This App depends heavily on Location Service. Allow this to get service from this app." ;
-"NSCameraUsageDescription" = "If you want to upload photo with camera, allow this." ;
-"NSPhotoLibraryUsageDescription" = "If you want to upload photos from album, allow this." ;
-"CFBundleDisplayName" = "MyEarthDiary";
-
+"NSLocationWhenInUseUsageDescription" = "This App helps you search your present position and, write a blog and, make a gallery about that location. You need to activate the location service to use this app.";
+"NSCameraUsageDescription" = "If you want to upload photos on the location gallery with the camera, allow the access." ;
+"NSPhotoLibraryUsageDescription" = "If you want to upload photos on the location gallery from the photo library, allow the access" ;
+"CFBundleDisplayName" = "Blog On Map";

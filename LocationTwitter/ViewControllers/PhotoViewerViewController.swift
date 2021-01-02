@@ -7,13 +7,20 @@
 
 import UIKit
 
+protocol  PhotoViewerViewControllerDelegate {
+    func deleteThisPhoto( _ photoName : String )
+}
+
 class PhotoViewerViewController: UIViewController {
     
     @IBOutlet weak var locationNameLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     var image : UIImage!
     var photoName : String!
+    var delegate : PhotoViewerViewControllerDelegate!
+    var imageName : String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +30,8 @@ class PhotoViewerViewController: UIViewController {
         }else{
             locationNameLabel.text =  "@ <\(photoName!)>"
         }
+        //
+        deleteButton.title = "삭제".localized()
         //
     }
     
@@ -36,5 +45,17 @@ class PhotoViewerViewController: UIViewController {
     @IBAction func cancel(){
         self.navigationController?.popViewController(animated: true)
     }
-
+    
+    @IBAction func deleteThisPhoto(){
+        
+        let alertController = makeAlert(withTitle:
+                                            "delete this photo".localized(), withContents: "would you really delete this photo?".localized())
+        let alertAction = UIAlertAction( title: "yes", style: .default ){_ in
+            self.delegate.deleteThisPhoto( self.imageName )
+            self.navigationController?.popViewController(animated: true)
+        }
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
+    
+    }
 }

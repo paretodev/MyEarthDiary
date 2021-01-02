@@ -69,6 +69,7 @@ class LocationDetailViewController: UITableViewController {
         
         // MARK: - Edit Only
         if let locationToEdit = locationToEdit {
+            navigationItem.title = "이 장소에 남긴 내 블로그".localized()
             nameOfLocationTextFeild.text = locationToEdit.name
             locationCategoryName = locationToEdit.category
             locationCategoryLabel.text = locationToEdit.category.localized()
@@ -259,7 +260,7 @@ class LocationDetailViewController: UITableViewController {
         // 1). placeholder set up
     func placeholderSetting() {
         twitterTextView.delegate = self // txtvReview가 유저가 선언한 outlet
-        twitterTextView.text = "이 장소에 대한 트윗을 남겨보세요🎤".localized()
+        twitterTextView.text = "이 장소에 대한 블로그를 남겨보세요🗣".localized()
         twitterTextView.textColor = UIColor.lightGray
     }
         //2). configure page control <-> scrollView
@@ -434,7 +435,7 @@ extension LocationDetailViewController : UITextViewDelegate {
     // TextView Place Holder
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = "이 장소에 대한 트윗을 남겨보세요🎤".localized()
+            textView.text = "이 장소에 대한 블로그를 남겨보세요🗣".localized()
             textView.textColor = UIColor.lightGray
         }
     }

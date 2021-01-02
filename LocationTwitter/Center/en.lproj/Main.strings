@@ -14,8 +14,8 @@
 /* Class = "UINavigationItem"; title = "내 위치 태그"; ObjectID = "7g0-R5-XeY"; */
 "7g0-R5-XeY.title" = "Tag";
 
-/* Class = "UIButton"; normalTitle = "이 장소에 트윗"; ObjectID = "A4N-dz-JfN"; */
-"A4N-dz-JfN.normalTitle" = "Twit Here✏️";
+/* Class = "UIButton"; normalTitle = "이 장소에 게시물 작성"; ObjectID = "A4N-dz-JfN"; */
+"A4N-dz-JfN.normalTitle" = "write a blog about here 📷✏️";
 
 /* Class = "UILabel"; text = "장소 이름"; ObjectID = "FVx-nh-eoJ"; */
 "FVx-nh-eoJ.text" = "Name";
@@ -38,8 +38,8 @@
 /* Class = "UIBarButtonItem"; title = "내 위치로"; ObjectID = "Utx-41-BUe"; */
 "Utx-41-BUe.title" = "My Location";
 
-/* Class = "UITableViewSection"; headerTitle = "이 장소 트윗"; ObjectID = "VUb-eo-r6r"; */
-"VUb-eo-r6r.headerTitle" = "Twit Here";
+/* Class = "UITableViewSection"; headerTitle = "이 장소에 게시물"; ObjectID = "VUb-eo-r6r"; */
+"VUb-eo-r6r.headerTitle" = "My Blog for This Location";
 
 /* Class = "UIButton"; normalTitle = "내 위치 잡기"; ObjectID = "WF0-R0-vht"; */
 "WF0-R0-vht.normalTitle" = "Tag My Location";
@@ -56,8 +56,8 @@
 /* Class = "UILabel"; text = "이 장소에 사진/영상 추가"; ObjectID = "aUa-tC-sNd"; */
 "aUa-tC-sNd.text" = "Add Photos for This Place";
 
-/* Class = "UITextView"; text = "이 장소 트윗"; ObjectID = "aXg-3N-iwy"; */
-"aXg-3N-iwy.text" = "Twit Here";
+/* Class = "UITextView"; text = "이 장소에 게시물 작성"; ObjectID = "aXg-3N-iwy"; */
+"aXg-3N-iwy.text" = "Write a blog about here✏️";
 
 /* Class = "UITextField"; placeholder = "이 장소의 이름을 적어주세요"; ObjectID = "awW-mn-wj1"; */
 "awW-mn-wj1.placeholder" = "Name This Location";
@@ -90,7 +90,7 @@
 "vbX-Wz-B0I.headerTitle" = "Location Gallery";
 
 /* Class = "UITabBarItem"; title = "여행 경로"; ObjectID = "wF5-Iz-V1a"; */
-"wF5-Iz-V1a.title" = "My Twits On My Earth";
+"wF5-Iz-V1a.title" = "My Blogs On My Earth";
 
 /* Class = "UILabel"; text = "날짜"; ObjectID = "wUH-py-vfr"; */
 "wUH-py-vfr.text" = "Date";

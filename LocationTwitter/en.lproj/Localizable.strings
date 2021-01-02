@@ -6,6 +6,7 @@
   
 */
 
+"이 장소에 남긴 내 블로그" = "My Blog On This Location";
 "( 나의 위치를 찾아보세요 )" = "( Look Up Your Location )";
 "위치를 더 정확하게 감지하는 중..." = "Improving Positioning Accuracy";
 "위치 검색 완료\n정확한 위치에는 셀룰러 데이터📶\n사용이 도움이 됩니다." = "Search Complete\nCellular Data Mode📶\ncould improve accuracy";
@@ -52,10 +53,14 @@
 "빵집" = "Bakery";
 "운동" = "Work Out";
 "직장" = "Work Place";
-"이 장소에 대한 트윗을 남겨보세요🎤" = "Leave a twit for this location🎤";
+"이 장소에 대한 블로그를 남겨보세요🗣" = "Write a Blog for this Location🗣";
 "장소 이름이 입력되지 않았어요👀" = "Waiting for location name input...👀";
 "완료" = "Done";
 "편집" = "Edit";
 "내부 에러" = "Internal Error";
 "데이터 저장 중 에러가 발생했습니다." = "Error Occured while saving data. We will soon figure out and update the app.";
 "확인" = "okay";
+"삭제" = "delete";
+"예" = "yes";
+"delete this photo" = "사진 삭제" ;
+"Would you really delete this photo?" = "이 사진을 정말 삭제하시겠습니까?";

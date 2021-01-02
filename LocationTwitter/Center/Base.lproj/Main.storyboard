@@ -13,7 +13,7 @@
         <!--내 위치 태그-->
         <scene sceneID="cCQ-9R-0HJ">
             <objects>
-                <viewController title="내 위치 태그" id="rNb-Yw-bge" customClass="CurrentLocationViewController" customModule="LocationTwitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="내 위치 태그" id="rNb-Yw-bge" customClass="CurrentLocationViewController" customModule="MyEarthDiary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sjv-be-Yhz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,8 +27,8 @@
                                         <color key="textColor" name="AccentColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="위도" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tb9-Jl-Cem">
-                                        <rect key="frame" x="0.0" y="25.5" width="75" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="위도" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tb9-Jl-Cem">
+                                        <rect key="frame" x="0.0" y="35.5" width="75" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="IWk-Ov-WZ6"/>
                                             <constraint firstAttribute="height" constant="21" id="a3x-0Z-PzP"/>
@@ -37,8 +37,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="경도" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DN-dK-bwZ">
-                                        <rect key="frame" x="0.0" y="58.5" width="75" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="경도" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DN-dK-bwZ">
+                                        <rect key="frame" x="0.0" y="68.5" width="75" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="hRo-K6-imz"/>
                                             <constraint firstAttribute="height" constant="21" id="kLU-y8-IV9"/>
@@ -47,8 +47,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="( 검색된 값 없음 )" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEY-kT-2A8">
-                                        <rect key="frame" x="85" y="25.5" width="230" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="( 검색된 값 없음 )" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEY-kT-2A8">
+                                        <rect key="frame" x="85" y="35.5" width="230" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="AjM-xZ-Lbf"/>
                                         </constraints>
@@ -56,8 +56,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="( 검색된 주소)" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeL-vr-9eC">
-                                        <rect key="frame" x="0.0" y="104.5" width="315" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="( 검색된 주소)" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeL-vr-9eC">
+                                        <rect key="frame" x="0.0" y="114.5" width="315" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -67,13 +67,13 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="10X-5b-kZe"/>
                                         </constraints>
-                                        <state key="normal" title="이 장소에 트윗✏️"/>
+                                        <state key="normal" title="여기 게시물 남기기 📷✏️"/>
                                         <connections>
                                             <segue destination="nuO-XY-Kz2" kind="show" identifier="AddLocation" id="YER-tk-9nt"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="( 검색된 값 없음 )" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKP-dz-2fX">
-                                        <rect key="frame" x="85" y="58.5" width="230" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="( 검색된 값 없음 )" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKP-dz-2fX">
+                                        <rect key="frame" x="85" y="68.5" width="230" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="DNJ-5Z-o7I"/>
                                         </constraints>
@@ -88,7 +88,7 @@
                                     <constraint firstItem="fHJ-gZ-DWb" firstAttribute="leading" secondItem="Oam-bw-kG4" secondAttribute="leading" id="5SR-W6-EhG"/>
                                     <constraint firstAttribute="trailing" secondItem="fHJ-gZ-DWb" secondAttribute="trailing" id="9BI-pH-lfv"/>
                                     <constraint firstItem="UKP-dz-2fX" firstAttribute="top" secondItem="yEY-kT-2A8" secondAttribute="bottom" constant="12" id="FXd-pX-bSL"/>
-                                    <constraint firstItem="yEY-kT-2A8" firstAttribute="top" relation="lessThanOrEqual" secondItem="fHJ-gZ-DWb" secondAttribute="bottom" constant="20" id="HTc-Sl-Yhv"/>
+                                    <constraint firstItem="yEY-kT-2A8" firstAttribute="top" secondItem="fHJ-gZ-DWb" secondAttribute="bottom" constant="15" id="HTc-Sl-Yhv"/>
                                     <constraint firstItem="A4N-dz-JfN" firstAttribute="leading" secondItem="Oam-bw-kG4" secondAttribute="leading" id="Knp-W7-sOl"/>
                                     <constraint firstItem="QeL-vr-9eC" firstAttribute="leading" secondItem="Oam-bw-kG4" secondAttribute="leading" id="VSJ-oW-jvu"/>
                                     <constraint firstItem="QeL-vr-9eC" firstAttribute="top" secondItem="UKP-dz-2fX" secondAttribute="bottom" constant="25" id="VVi-b4-V7C"/>
@@ -99,7 +99,7 @@
                                     <constraint firstItem="QeL-vr-9eC" firstAttribute="top" secondItem="0DN-dK-bwZ" secondAttribute="bottom" constant="25" id="get-2b-Ep2"/>
                                     <constraint firstItem="Tb9-Jl-Cem" firstAttribute="leading" secondItem="Oam-bw-kG4" secondAttribute="leading" id="kvu-Cj-x1T"/>
                                     <constraint firstAttribute="trailing" secondItem="A4N-dz-JfN" secondAttribute="trailing" id="oQy-Xb-cfJ"/>
-                                    <constraint firstItem="Tb9-Jl-Cem" firstAttribute="top" relation="lessThanOrEqual" secondItem="fHJ-gZ-DWb" secondAttribute="bottom" constant="20" id="qNU-e8-XlO"/>
+                                    <constraint firstItem="Tb9-Jl-Cem" firstAttribute="top" secondItem="fHJ-gZ-DWb" secondAttribute="bottom" constant="15" id="qNU-e8-XlO"/>
                                     <constraint firstAttribute="trailing" secondItem="yEY-kT-2A8" secondAttribute="trailing" id="sfq-Zx-iug"/>
                                     <constraint firstItem="0DN-dK-bwZ" firstAttribute="leading" secondItem="Oam-bw-kG4" secondAttribute="leading" id="v5j-Ag-Nra"/>
                                     <constraint firstItem="A4N-dz-JfN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="QeL-vr-9eC" secondAttribute="bottom" constant="30" id="wcf-w5-ZCS"/>
@@ -149,13 +149,13 @@
         <!--내가 가본 곳들-->
         <scene sceneID="8Tl-LU-ZZ4">
             <objects>
-                <tableViewController id="002-aW-0Bt" customClass="VisitedLocationsViewController" customModule="LocationTwitter" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="002-aW-0Bt" customClass="VisitedLocationsViewController" customModule="MyEarthDiary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" canCancelContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="iP5-Or-GDo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="LocationCell" id="IPP-Lb-p0J" customClass="LocationCell" customModule="LocationTwitter" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="LocationCell" id="IPP-Lb-p0J" customClass="LocationCell" customModule="MyEarthDiary" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IPP-Lb-p0J" translatesAutoresizingMaskIntoConstraints="NO" id="NBO-EA-IoM">
@@ -203,7 +203,7 @@
         <!--새로운 장소 추가-->
         <scene sceneID="3Un-dU-XAO">
             <objects>
-                <tableViewController id="nuO-XY-Kz2" customClass="LocationDetailViewController" customModule="LocationTwitter" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="nuO-XY-Kz2" customClass="LocationDetailViewController" customModule="MyEarthDiary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="UgC-jL-gig">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -352,7 +352,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="이 장소 트윗" id="VUb-eo-r6r">
+                            <tableViewSection headerTitle="이 장소 게시물" id="VUb-eo-r6r">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" translatesAutoresizingMaskIntoConstraints="NO" id="Xvp-LS-Oxv">
                                         <rect key="frame" x="0.0" y="304.5" width="375" height="44"/>
@@ -420,7 +420,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="183"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="이 장소 트윗" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aXg-3N-iwy">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="이 장소 게시물" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aXg-3N-iwy">
                                                     <rect key="frame" x="16" y="11" width="343" height="350"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
@@ -481,7 +481,7 @@
         <!--Category Picker-->
         <scene sceneID="ZOC-7J-u7S">
             <objects>
-                <tableViewController id="hTL-Gk-SMW" customClass="CategoryPicker" customModule="LocationTwitter" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="hTL-Gk-SMW" customClass="CategoryPicker" customModule="MyEarthDiary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fgw-bf-XFZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -514,7 +514,7 @@
         <!--Photo Viewer View Controller-->
         <scene sceneID="ixL-px-Bkw">
             <objects>
-                <viewController id="Hf9-Vy-pnd" customClass="PhotoViewerViewController" customModule="LocationTwitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Hf9-Vy-pnd" customClass="PhotoViewerViewController" customModule="MyEarthDiary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NFd-8d-ED0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -558,8 +558,15 @@
                                 <action selector="cancel" destination="Hf9-Vy-pnd" id="kSp-Ss-cc5"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="삭제" id="pLe-pr-xRo">
+                            <color key="tintColor" systemColor="systemPinkColor"/>
+                            <connections>
+                                <action selector="deleteThisPhoto" destination="Hf9-Vy-pnd" id="hxX-ji-l8h"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteButton" destination="pLe-pr-xRo" id="L1i-fr-ejM"/>
                         <outlet property="locationNameLabel" destination="N3y-6r-Mpm" id="lKx-wJ-WSk"/>
                         <outlet property="photoImageView" destination="9mQ-GG-hIv" id="2Q1-8l-EYC"/>
                     </connections>
@@ -629,12 +636,12 @@
         <!--내 여행 경로-->
         <scene sceneID="3Qo-UB-cSe">
             <objects>
-                <viewController id="oaX-LG-dP6" customClass="MapViewController" customModule="LocationTwitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oaX-LG-dP6" customClass="MapViewController" customModule="MyEarthDiary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H0w-C0-lan">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-qr-weY">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-qr-weY">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <connections>
                                     <outlet property="delegate" destination="oaX-LG-dP6" id="6T1-in-UtF"/>
@@ -705,6 +712,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
