@@ -60,3 +60,12 @@ func fatalCoreDataError(_ error : Error){
     )
 }
 
+//
+func removeFileAtUrl(_ url: URL){
+    do {
+        try  FileManager().removeItem(at: url)
+    } catch  {
+        print("Failed deleting the file at \(url.description)")
+        fatalError()
+    }
+}

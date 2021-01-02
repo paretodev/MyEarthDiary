@@ -212,7 +212,9 @@ class LocationDetailViewController: UITableViewController {
             let image = (sender as! UIImageView).image!
             //
             controller.image = image
-            controller.photoName = self.nameOfLocationTextFeild.text!
+            controller.delegate = self
+            controller.photoName = nameOfLocationTextFeild.text
+            controller.imageName = locationPhotos[ self.galleryPageControl.currentPage ]
             //MARK:-빈 텍스트가 넘어가도 오류가 나지 않는지 파악하기
         }
     }
@@ -279,9 +281,11 @@ class LocationDetailViewController: UITableViewController {
         // 스크롤뷰 초기화
         for subview in locationGalleryScrollView.subviews {
             subview.removeFromSuperview()
-//            print("begin gallery set up. Removed all the image views. removed view type :  \(type(of: subview))")
         }
-        //
+        if locationPhotos.isEmpty {
+            locationPhotos.append("noImage")
+        }
+        // Config Start
         galleryPageControl.numberOfPages = locationPhotos.count
         //
         locationGalleryScrollView.contentSize = CGSize(
@@ -489,4 +493,21 @@ extension LocationDetailViewController : UITextViewDelegate {
     // MARK:- End of VC
 }
 
+extension LocationDetailViewController : PhotoViewerViewControllerDelegate {
+    func deleteThisPhoto(_ photoName: String) {
+        //
+        guard photoName != "noImage" else {
+            navigationController?.popViewController(animated: true)
+            return
+        }
+        //
+        locationPhotos = locationPhotos.filter{ $0 != "\(photoName)"}
+        let url = applicationDocumentsDirectory.appendingPathComponent( "image-\(photoName).jpg", isDirectory: false )
+        removeFileAtUrl(url)
+        print("delete file at : \(url.description) succeeded.")
+        //
+        configureGalleryScrollView()
+        navigationController?.popViewController(animated: true)
+    }
+}
 

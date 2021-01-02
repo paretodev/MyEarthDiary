@@ -173,13 +173,16 @@ extension MapViewController: MKMapViewDelegate {
     // MARK: - Configure AnnotationView According to : 1/ZoomOutLevel
     func formatAnnotation(_ annotationView : MKAnnotationView, for map: MKMapView){
         if var zoomOutLevel = self.zoomOutLevel {
-            // zoom out level set maximum
-            if zoomOutLevel >= 3 {
-                zoomOutLevel = 2
-            }else if zoomOutLevel == 2 {
-                zoomOutLevel = 1
+            //MARK:- Configure Image Size According To User's Zoom Out level.
+            switch zoomOutLevel {
+                case let a where a > 5:
+                    zoomOutLevel = 2
+                case let a where a <= 5 :
+                    zoomOutLevel = 1
+                default :
+                    break
             }
-            let scale =  1.45 * ( 1 / CGFloat(zoomOutLevel) )
+            let scale =  1.15 * ( 1 / CGFloat(zoomOutLevel) )
             annotationView.transform = CGAffineTransform( scaleX: CGFloat(scale), y: CGFloat(scale) )
         }
     }

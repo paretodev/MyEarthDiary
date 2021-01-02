@@ -20,7 +20,7 @@ class PhotoViewerViewController: UIViewController {
     var image : UIImage!
     var photoName : String!
     var delegate : PhotoViewerViewControllerDelegate!
-    var imageName : String!
+    var imageName : String! // delivered
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,17 +45,22 @@ class PhotoViewerViewController: UIViewController {
     @IBAction func cancel(){
         self.navigationController?.popViewController(animated: true)
     }
-    
+    //MARK:-When User Taps Delete for the photo
     @IBAction func deleteThisPhoto(){
-        
-        let alertController = makeAlert(withTitle:
-                                            "delete this photo".localized(), withContents: "would you really delete this photo?".localized())
-        let alertAction = UIAlertAction( title: "yes", style: .default ){_ in
-            self.delegate.deleteThisPhoto( self.imageName )
-            self.navigationController?.popViewController(animated: true)
+        //MARK:-Controller
+        let alertController = UIAlertController(title: "Asking For Confirm".localized(), message: "Do you confirm deleting this photo?".localized(), preferredStyle: .alert)
+        //MARK:-Action1
+        var alertAction = UIAlertAction( title: "yes".localized(), style: .default ){ _ in
+            self.delegate.deleteThisPhoto(self.imageName)
         }
         alertController.addAction(alertAction)
+        //MARK:-Action2
+        alertAction = UIAlertAction( title: "cancel".localized(), style: .default ){ _ in
+            alertController.removeFromParent()
+        }
+        alertController.addAction(alertAction)
+        //MARK:-present it
         present(alertController, animated: true, completion: nil)
-    
+        //
     }
 }
