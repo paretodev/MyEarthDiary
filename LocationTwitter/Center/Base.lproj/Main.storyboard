@@ -13,7 +13,7 @@
         <!--내 위치 태그-->
         <scene sceneID="cCQ-9R-0HJ">
             <objects>
-                <viewController title="내 위치 태그" id="rNb-Yw-bge" customClass="CurrentLocationViewController" customModule="MyEarthDiary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="내 위치 태그" id="rNb-Yw-bge" customClass="CurrentLocationViewController" customModule="LocationTwitter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sjv-be-Yhz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,13 +149,13 @@
         <!--내가 가본 곳들-->
         <scene sceneID="8Tl-LU-ZZ4">
             <objects>
-                <tableViewController id="002-aW-0Bt" customClass="VisitedLocationsViewController" customModule="MyEarthDiary" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="002-aW-0Bt" customClass="VisitedLocationsViewController" customModule="LocationTwitter" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" canCancelContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="iP5-Or-GDo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="LocationCell" id="IPP-Lb-p0J" customClass="LocationCell" customModule="MyEarthDiary" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="LocationCell" id="IPP-Lb-p0J" customClass="LocationCell" customModule="LocationTwitter" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IPP-Lb-p0J" translatesAutoresizingMaskIntoConstraints="NO" id="NBO-EA-IoM">
@@ -203,7 +203,7 @@
         <!--새로운 장소 추가-->
         <scene sceneID="3Un-dU-XAO">
             <objects>
-                <tableViewController id="nuO-XY-Kz2" customClass="LocationDetailViewController" customModule="MyEarthDiary" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="nuO-XY-Kz2" customClass="LocationDetailViewController" customModule="LocationTwitter" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="UgC-jL-gig">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -481,7 +481,7 @@
         <!--Category Picker-->
         <scene sceneID="ZOC-7J-u7S">
             <objects>
-                <tableViewController id="hTL-Gk-SMW" customClass="CategoryPicker" customModule="MyEarthDiary" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="hTL-Gk-SMW" customClass="CategoryPicker" customModule="LocationTwitter" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fgw-bf-XFZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -514,7 +514,7 @@
         <!--Photo Viewer View Controller-->
         <scene sceneID="ixL-px-Bkw">
             <objects>
-                <viewController id="Hf9-Vy-pnd" customClass="PhotoViewerViewController" customModule="MyEarthDiary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Hf9-Vy-pnd" customClass="PhotoViewerViewController" customModule="LocationTwitter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NFd-8d-ED0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -636,12 +636,60 @@
         <!--내 여행 경로-->
         <scene sceneID="3Qo-UB-cSe">
             <objects>
-                <viewController id="oaX-LG-dP6" customClass="MapViewController" customModule="MyEarthDiary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oaX-LG-dP6" customClass="MapViewController" customModule="LocationTwitter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H0w-C0-lan">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-qr-weY">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iuY-nL-eyP">
+                                <rect key="frame" x="16" y="86" width="343" height="180"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="zv4-hU-sGF"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AutoCompleteCell" textLabel="Lvq-52-EC2" detailTextLabel="iJw-VQ-Qqy" style="IBUITableViewCellStyleSubtitle" id="rEB-5c-bey">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="56"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rEB-5c-bey" id="JIk-Na-38u">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="56"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" tag="100" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lvq-52-EC2">
+                                                    <rect key="frame" x="16" y="9" width="33" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" tag="101" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iJw-VQ-Qqy">
+                                                    <rect key="frame" x="16" y="31.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EXj-fh-zsh">
+                                <rect key="frame" x="0.0" y="44" width="375" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="rLu-zH-uzw"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" id="p4N-Af-8iw">
+                                        <searchBar key="customView" contentMode="redraw" id="Vqz-Zv-8Wp">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="42"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </searchBar>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-qr-weY">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <connections>
                                     <outlet property="delegate" destination="oaX-LG-dP6" id="6T1-in-UtF"/>
@@ -651,10 +699,14 @@
                         <viewLayoutGuide key="safeArea" id="ena-EH-uJi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="iuY-nL-eyP" firstAttribute="top" secondItem="EXj-fh-zsh" secondAttribute="bottom" id="1AY-aY-5t5"/>
                             <constraint firstItem="HkC-qr-weY" firstAttribute="leading" secondItem="ena-EH-uJi" secondAttribute="leading" id="1Jt-Va-hqB"/>
                             <constraint firstAttribute="bottom" secondItem="HkC-qr-weY" secondAttribute="bottom" id="58d-EH-Opt"/>
                             <constraint firstItem="HkC-qr-weY" firstAttribute="trailing" secondItem="ena-EH-uJi" secondAttribute="trailing" id="I7s-Sw-RhB"/>
+                            <constraint firstItem="EXj-fh-zsh" firstAttribute="top" secondItem="ena-EH-uJi" secondAttribute="top" id="N9b-Fo-OLL"/>
+                            <constraint firstItem="EXj-fh-zsh" firstAttribute="leading" secondItem="ena-EH-uJi" secondAttribute="leading" id="S3B-Kn-YYb"/>
                             <constraint firstItem="HkC-qr-weY" firstAttribute="top" secondItem="ena-EH-uJi" secondAttribute="top" id="gc9-pg-7oO"/>
+                            <constraint firstItem="EXj-fh-zsh" firstAttribute="trailing" secondItem="ena-EH-uJi" secondAttribute="trailing" id="jRj-TQ-t4E"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="내 여행 경로" id="GXs-Cs-6zs">
@@ -670,13 +722,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addressSearchBar" destination="Vqz-Zv-8Wp" id="rM2-I6-7rL"/>
+                        <outlet property="autoCompleteTableView" destination="iuY-nL-eyP" id="bOF-YG-dxo"/>
                         <outlet property="mapView" destination="HkC-qr-weY" id="ell-an-EJn"/>
+                        <outlet property="mapViewContentView" destination="H0w-C0-lan" id="VI9-SH-rFU"/>
                         <segue destination="nuO-XY-Kz2" kind="show" identifier="EditLocation" id="RRE-3Q-zSr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sFP-OB-GCm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1830" y="1489"/>
+            <point key="canvasLocation" x="1829.5999999999999" y="1488.305847076462"/>
         </scene>
         <!--여행 경로-->
         <scene sceneID="x2D-9f-lbw">
@@ -699,7 +754,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="YER-tk-9nt"/>
+        <segue reference="RRE-3Q-zSr"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="compass" width="21.5" height="21.5"/>

@@ -2,12 +2,19 @@ import UIKit
 import MapKit
 import CoreData
 
-class MapViewController: UIViewController {
-  @IBOutlet weak var mapView: MKMapView!
-//
+class MapViewController: UIViewController, MKLocalSearchCompleterDelegate {
+    
+    //MARK:-UI Controls
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet var mapViewContentView: UIView!
+    @IBOutlet weak var autoCompleteTableView: UITableView!
+    @IBOutlet weak var addressSearchBar: UISearchBar!
+    
+    //MARK:- Ins Vars
   var locations = [Location]()
   var zoomOutLevel : Int?
   private var mapChangedFromUserInteraction = false
+  var searchCompleter : MKLocalSearchCompleter?
   var managedObjectContext: NSManagedObjectContext! {
     didSet {
       NotificationCenter.default.addObserver(forName: Notification.Name.NSManagedObjectContextObjectsDidChange, object: managedObjectContext, queue: OperationQueue.main) { _ in
@@ -17,6 +24,8 @@ class MapViewController: UIViewController {
       }
     }
   }
+    var currentAutoCompletionResults :  [MKLocalSearchCompletion]
+    = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,9 +37,21 @@ class MapViewController: UIViewController {
     if !locations.isEmpty {
       showLocations()
     }
+    //
+    self.addressSearchBar.delegate = self
+    //
+    self.searchCompleter =  MKLocalSearchCompleter()
+    self.searchCompleter!.delegate = self
+    self.searchCompleter!.region = self.mapView.region
+    //MARK:- AutoCompleteTable Config.
+    self.autoCompleteTableView.delegate = self
+    let constraint1 = NSLayoutConstraint(item: self.autoCompleteTableView, attribute: .leading, relatedBy: .equal, toItem: self.addressSearchBar, attribute: .leading, multiplier: 1.0, constant: 0.0)
+    let constraint2 = NSLayoutConstraint(item: self.autoCompleteTableView, attribute: .trailing, relatedBy: .equal, toItem: self.addressSearchBar, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+    mapViewContentView.addConstraints( [constraint1, constraint2] )
+    //
+    autoCompleteTableView.isHidden = true
   }
     
-
   // MARK: - Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "EditLocation" {
@@ -221,3 +242,37 @@ extension MapViewController: MKMapViewDelegate {
     // MARK: - End of Extension mapview
 }
 
+extension MapViewController : UISearchBarDelegate {
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        //
+        guard !searchBar.text!.isEmpty else{ return }
+        //MARK:- Make Request And Get Auto Completed Location Objs
+        self.searchCompleter!.queryFragment = searchBar.text!
+        self.currentAutoCompletionResults =  self.searchCompleter!.results
+        
+        //MARK: - Display the text of auto completed results into table view
+        self.autoCompleteTableView.isHidden = false
+    }
+}
+
+
+extension MapViewController : UITableViewDelegate, UITableViewDataSource{
+    
+    //
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AutoCompleteCell")!
+        let result = self.currentAutoCompletionResults[indexPath.row]
+        let titleLabel =  cell.viewWithTag(100) as! UILabel
+        let subtitleLable =  cell.viewWithTag(101) as! UILabel
+        titleLabel.text = result.title
+        subtitleLable.text = result.subtitle
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.currentAutoCompletionResults.count
+    }
+    
+    //
+}
