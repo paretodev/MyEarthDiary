@@ -559,14 +559,14 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="삭제" id="pLe-pr-xRo">
-                            <color key="tintColor" systemColor="systemPinkColor"/>
+                            <color key="tintColor" systemColor="systemRedColor"/>
                             <connections>
                                 <action selector="deleteThisPhoto" destination="Hf9-Vy-pnd" id="hxX-ji-l8h"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="deleteButton" destination="pLe-pr-xRo" id="L1i-fr-ejM"/>
+                        <outlet property="deleteButton" destination="pLe-pr-xRo" id="X7z-yN-EOJ"/>
                         <outlet property="locationNameLabel" destination="N3y-6r-Mpm" id="lKx-wJ-WSk"/>
                         <outlet property="photoImageView" destination="9mQ-GG-hIv" id="2Q1-8l-EYC"/>
                     </connections>
@@ -774,8 +774,8 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

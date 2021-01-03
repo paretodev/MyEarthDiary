@@ -32,6 +32,7 @@ class PhotoViewerViewController: UIViewController {
         }
         //
         deleteButton.title = "삭제".localized()
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([.foregroundColor: UIColor.systemPink], for: .normal)
         //
     }
     
@@ -40,6 +41,7 @@ class PhotoViewerViewController: UIViewController {
         photoImageView.layer.cornerRadius = 8
         photoImageView.layer.masksToBounds = true
         photoImageView.image = image.resized(withBounds: photoImageView.bounds.size)
+        
     }
     
     @IBAction func cancel(){
