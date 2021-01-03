@@ -84,15 +84,24 @@ class LocationDetailViewController: UITableViewController {
         // MARK: - 1). Common
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44 // Something reasonable to help ios render your cells
+        
             // 1). Scroll View's Delegate Regi.
         locationGalleryScrollView.delegate = self
         galleryPageControl.pageIndicatorTintColor = .gray
         galleryPageControl.currentPageIndicatorTintColor = .lightGray
+        
             // 2). Configure Date, Address Labels.
         kAddressLabel = KRWordWrapLabel()
         kAddressLabel!.lineBreakMode = .byWordWrapping
         kAddressLabel!.numberOfLines = 0
-        kAddressLabel!.text = string(from: placemark)
+         let str = string(from: placemark)
+        if str.isEmpty {
+            kAddressLabel!.text = "미등록 주소".localized()
+        }
+        else{
+            kAddressLabel!.text = str
+        }
+        
             // 3). Add Constraints
         addressLabelMotherView.addSubview(kAddressLabel!)
         kAddressLabel!.translatesAutoresizingMaskIntoConstraints = false

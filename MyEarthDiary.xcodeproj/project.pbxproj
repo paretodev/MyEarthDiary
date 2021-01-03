@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1C08E1E925853B5B001A9DC8 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C08E1E825853B5B001A9DC8 /* CategoryPicker.swift */; };
 		1C2800D425A1EAEA005881EE /* CurrentSearchAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2800D325A1EAEA005881EE /* CurrentSearchAnnotation.swift */; };
+		1C2800D725A22C7D005881EE /* CurrentCenterLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2800D625A22C7D005881EE /* CurrentCenterLocation.swift */; };
 		1C28C475258643F9004E477D /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28C474258643F9004E477D /* UIImage+Resize.swift */; };
 		1C3D48D425848DB600561692 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3D48D325848DB600561692 /* AppDelegate.swift */; };
 		1C3D48D625848DB600561692 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3D48D525848DB600561692 /* SceneDelegate.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		1C08E1E825853B5B001A9DC8 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
 		1C2800D325A1EAEA005881EE /* CurrentSearchAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSearchAnnotation.swift; sourceTree = "<group>"; };
+		1C2800D625A22C7D005881EE /* CurrentCenterLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentCenterLocation.swift; sourceTree = "<group>"; };
 		1C28C474258643F9004E477D /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		1C3D48D025848DB600561692 /* LocationTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C3D48D325848DB600561692 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				1C3D48F425849A7000561692 /* String+Add.swift */,
 				1CF44D122592EC6200A7CD24 /* String+localized.swift */,
 				1C2800D325A1EAEA005881EE /* CurrentSearchAnnotation.swift */,
+				1C2800D625A22C7D005881EE /* CurrentCenterLocation.swift */,
 			);
 			path = Gadgets;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				1C3D48EE25848EE200561692 /* CurrentLocationViewController.swift in Sources */,
 				1C3D48D425848DB600561692 /* AppDelegate.swift in Sources */,
 				1C3D48D625848DB600561692 /* SceneDelegate.swift in Sources */,
+				1C2800D725A22C7D005881EE /* CurrentCenterLocation.swift in Sources */,
 				1C3D48F825849A7000561692 /* CurrentLocationStates.swift in Sources */,
 				1C3D48F625849A7000561692 /* UniversalFunctions.swift in Sources */,
 				1CEDAFE125885BD500CCDBA8 /* Location+CoreDataProperties copy.swift in Sources */,

@@ -1,6 +1,7 @@
 import UIKit
 import MapKit
 import CoreData
+import CoreLocation
 
 class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITableViewDelegate, UITableViewDataSource  {
     
@@ -30,8 +31,13 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
     //MARK:- Vars for temp and map move focusing &  annotations
     var currentSearchedMapItem : MKMapItem?
     var currentSearchedLocatoin : CLLocationCoordinate2D?
-    var currentCenterOfMap : CLLocationCoordinate2D?
     var currentSearchedAnnotation : SearchedLocation?
+    var updatedMapViewCenter : CLLocationCoordinate2D?
+    var currentCenterPlacemark : CLPlacemark?
+    lazy var geoCoder = {
+        return CLGeocoder()
+    }()
+    var currentCenterAnnotation : CurrentCenterLocation?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,6 +51,7 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
     }
     //
     self.addressSearchBar.delegate = self
+    self.addressSearchBar.placeholder = "주소로 이동하기".localized()
     //
     self.searchCompleter =  MKLocalSearchCompleter()
     self.searchCompleter!.delegate = self
@@ -85,7 +92,15 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
         controller.coordinate = currentSearchedMapItem!.placemark.coordinate
         controller.managedObjectContext = self.managedObjectContext
     }
-    //
+    else if segue.identifier == "AddFromCurrentCenter"{
+        
+        let controller = segue.destination as! LocationDetailViewController
+        controller.location = currentCenterPlacemark!.location
+        controller.placemark = currentCenterPlacemark!
+        controller.coordinate = currentCenterPlacemark!.location!.coordinate
+        controller.managedObjectContext = self.managedObjectContext
+        
+    }
   }
 
   // MARK: - Actions
@@ -155,6 +170,10 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
         performSegue(withIdentifier: "AddLocation", sender: nil)
     }
     //
+    @objc func performSegueForCenterUpdate(){
+        performSegue(withIdentifier: "AddFromCurrentCenter", sender: nil)
+    }
+    //
 }
 
 //MARK: - Mapview Delegating for making MK Annotation View <- MK Annotation
@@ -191,6 +210,34 @@ extension MapViewController: MKMapViewDelegate {
             return searchedAnnotationView
         }
         
+        //
+        else if annotation is CurrentCenterLocation {
+            let identifier = "CurrentCenterLocation"
+            var centerAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            //없었을 경우
+            if centerAnnotationView == nil {
+                let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                pinView.isEnabled = true
+                pinView.canShowCallout = true
+                let rightButton = UIButton(type: .contactAdd )
+                rightButton.tintColor = UIColor.darkGray
+                rightButton.addTarget(
+                    self,
+                    action: #selector( performSegueForCenterUpdate ), // perform segue
+                    for: .touchUpInside
+                )
+                pinView.rightCalloutAccessoryView = rightButton
+                centerAnnotationView = pinView
+            }
+            if let centerAnnotationView = centerAnnotationView {
+                    // MARK: - 주석 내용 넣기
+                    centerAnnotationView.annotation = annotation
+                ( centerAnnotationView as! MKPinAnnotationView ).pinTintColor = UIColor.darkGray
+                }
+            return centerAnnotationView
+        }
+        
+        //
         return nil
     }
     
@@ -272,6 +319,11 @@ extension MapViewController: MKMapViewDelegate {
     
     // MARK: - Calculate Zoom Out Level & If pinch out or in detected Configure Annotations Accordinly
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        mapView.removeAnnotations( mapView.annotations.filter{ $0 is CurrentCenterLocation } )
+        
+        self.updatedMapViewCenter = self.mapView.centerCoordinate
+        //
         let zoomWidth = mapView.visibleMapRect.size.width
         self.zoomOutLevel = Int( log2(zoomWidth) ) - 7
 //        print("mapview zoom out level now : \(self.zoomOutLevel!)")
@@ -282,11 +334,47 @@ extension MapViewController: MKMapViewDelegate {
             self.mapView.addAnnotations(locations)
         }
         //
+        let nowLat = self.mapView.centerCoordinate.latitude
+        let nowLong = self.mapView.centerCoordinate.longitude
+        //
+        //MARK: - find placemark for coordinate - background thread schedule
+        DispatchQueue.global().async {
+            //
+            let stdLat = nowLat
+            let stdLong = nowLong
+            //
+            self.geoCoder.reverseGeocodeLocation(  CLLocation(latitude: nowLat, longitude: nowLong) ){ placemarks, error in
+                if let error = error {
+                    return
+                }
+                if let placemarks = placemarks {
+                    let responsePlacemark = placemarks.last!
+                    DispatchQueue.main.async {
+                        if ( self.updatedMapViewCenter!.longitude == stdLong && self.updatedMapViewCenter!.latitude == stdLat) {
+                            self.currentCenterPlacemark = responsePlacemark
+                            let currentCenterLocation = CurrentCenterLocation()
+                            currentCenterLocation.coordinate = responsePlacemark.location!.coordinate
+                            currentCenterLocation.title = "현재 지도 위치".localized()
+                            var addressString = string(from: responsePlacemark )
+                            if addressString.isEmpty { addressString = "미등록 주소".localized()}
+                            currentCenterLocation.subtitle = addressString
+                            self.mapView.addAnnotation( currentCenterLocation )
+                        }
+                    }
+                }
+        }
+
+        
+        //
     }
+    }
+    
+    
     //
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         mapChangedFromUserInteraction = mapViewRegionDidChangeFromUserInteraction()
     }
+    //
     
     // MARK:- Helper Methods
     private func mapViewRegionDidChangeFromUserInteraction() -> Bool {

@@ -733,6 +733,7 @@
                         <outlet property="toolBar" destination="EXj-fh-zsh" id="Zns-nL-Pzh"/>
                         <segue destination="nuO-XY-Kz2" kind="show" identifier="EditLocation" id="RRE-3Q-zSr"/>
                         <segue destination="nuO-XY-Kz2" kind="show" identifier="AddLocation" id="ZNY-lP-TWH"/>
+                        <segue destination="nuO-XY-Kz2" kind="show" identifier="AddFromCurrentCenter" id="Kfj-I5-v9k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sFP-OB-GCm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -760,7 +761,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZNY-lP-TWH"/>
+        <segue reference="Kfj-I5-v9k"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="compass" width="21.5" height="21.5"/>

@@ -62,3 +62,6 @@
 "확인" = "okay";
 "삭제" = "delete";
 "예" = "yes";
+"현재 지도 위치" = "Present Map Center";
+"미등록 주소" = "Unregistered Address";
+"주소로 이동하기" = "Search the address to fly to";
