@@ -10,7 +10,7 @@ import CoreData
 import CoreLocation
 import YPImagePicker
 import KRWordWrapLabel
-
+// 플레이스마크,
 class LocationDetailViewController: UITableViewController {
     
     //MARK:- Ins Vars

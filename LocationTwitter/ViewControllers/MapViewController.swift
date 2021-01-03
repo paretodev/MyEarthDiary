@@ -27,7 +27,11 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
   }
     var currentAutoCompletionResults :  [MKLocalSearchCompletion]
     = []
-    var currentLocationMapItem : MKMapItem?
+    //MARK:- Vars for temp and map move focusing &  annotations
+    var currentSearchedMapItem : MKMapItem?
+    var currentSearchedLocatoin : CLLocationCoordinate2D?
+    var currentCenterOfMap : CLLocationCoordinate2D?
+    var currentSearchedAnnotation : SearchedLocation?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -66,6 +70,7 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
     
   // MARK: - Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //
     if segue.identifier == "EditLocation" {
       let controller = segue.destination as! LocationDetailViewController
       controller.managedObjectContext = managedObjectContext
@@ -73,6 +78,14 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
       let location = locations[button.tag]
       controller.locationToEdit = location
     }
+    else if segue.identifier == "AddLocation" {
+        let controller = segue.destination as! LocationDetailViewController
+        controller.location = currentSearchedMapItem!.placemark.location
+        controller.placemark = currentSearchedMapItem!.placemark
+        controller.coordinate = currentSearchedMapItem!.placemark.coordinate
+        controller.managedObjectContext = self.managedObjectContext
+    }
+    //
   }
 
   // MARK: - Actions
@@ -136,6 +149,12 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
   @objc func showLocationDetails(_ sender: UIButton) {
     performSegue(withIdentifier: "EditLocation", sender: sender)
   }
+    
+    //
+    @objc func performSegueForRecentSearch(){
+        performSegue(withIdentifier: "AddLocation", sender: nil)
+    }
+    //
 }
 
 //MARK: - Mapview Delegating for making MK Annotation View <- MK Annotation
@@ -144,19 +163,50 @@ extension MapViewController: MKMapViewDelegate {
     // 1). main
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     guard annotation is Location else {
-      return nil
+        
+        //MARK:- Location 출신의 Annotation이 아닐 경우
+        if annotation is SearchedLocation {
+            let identifier = "SearchedLocation"
+            var searchedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            //없었을 경우
+            if searchedAnnotationView == nil {
+                let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                pinView.isEnabled = true
+                pinView.canShowCallout = true
+                let rightButton = UIButton(type: .contactAdd )
+                rightButton.tintColor = UIColor(named: "tblue")
+                rightButton.addTarget(
+                    self,
+                    action: #selector( performSegueForRecentSearch ), // perform segue
+                    for: .touchUpInside
+                )
+                pinView.rightCalloutAccessoryView = rightButton
+                searchedAnnotationView = pinView
+            }
+            if let searchedAnnotationView = searchedAnnotationView {
+                    // MARK: - 주석 내용 넣기
+                    searchedAnnotationView.annotation = annotation
+                    ( searchedAnnotationView as! MKPinAnnotationView ).pinTintColor = UIColor(named: "tblue")
+                }
+            return searchedAnnotationView
+        }
+        
+        return nil
     }
+    
+    //MARK: - Making Annotation From Another 2 VC.
     let identifier = "Location"
     var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
     // 새로운 핀 뷰 만들기
     if annotationView == nil {
+        
         let pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
         pinView.isEnabled = true
         pinView.canShowCallout = true
         let rightButton = UIButton(type: .detailDisclosure)
         rightButton.addTarget(
             self,
-            action: #selector( showLocationDetails(_:) ),
+            action: #selector( showLocationDetails(_:) ), //
             for: .touchUpInside
         )
         pinView.rightCalloutAccessoryView = rightButton
@@ -273,7 +323,6 @@ extension MapViewController: MKMapViewDelegate {
 extension MapViewController : UISearchBarDelegate {
     //
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("text did change called")
         guard !searchBar.text!.isEmpty else{ return }
         //MARK:- Make Request And Get Auto Completed Location Objs
         self.searchCompleter!.queryFragment = searchBar.text!
@@ -284,7 +333,6 @@ extension MapViewController : UISearchBarDelegate {
     }
     //
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("text did change called")
         guard !searchBar.text!.isEmpty else{ return }
         //MARK:- Make Request And Get Auto Completed Location Objs
         self.searchCompleter!.queryFragment = searchBar.text!
@@ -336,10 +384,24 @@ extension MapViewController {
             }
             //
             let targetLocationMapItem = response.mapItems[0]
-            self.currentLocationMapItem = targetLocationMapItem
+            //
+            self.currentSearchedMapItem = targetLocationMapItem
+            self.currentSearchedLocatoin = targetLocationMapItem.placemark.coordinate
             //
             self.addressSearchBar.text = targetLocationMapItem.name ?? ""
             tableView.isHidden = true
+            
+           //MARK:- Make a new SearchedAnnotation Object and add annotation
+            if let originalSearchedAnnotation = self.currentSearchedAnnotation{
+                self.mapView.removeAnnotation(originalSearchedAnnotation)
+            }
+            let searchAnnoation = SearchedLocation()
+            searchAnnoation.coordinate = targetLocationMapItem.placemark.coordinate
+            searchAnnoation.title = targetLocationMapItem.name
+            searchAnnoation.subtitle = string(from: targetLocationMapItem.placemark)
+            self.currentSearchedAnnotation = searchAnnoation
+            //
+            self.mapView.addAnnotation(searchAnnoation)
             //
             self.setRegion(on: targetLocationMapItem.placemark.coordinate )
             //
