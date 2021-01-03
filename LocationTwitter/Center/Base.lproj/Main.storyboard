@@ -641,6 +641,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EXj-fh-zsh">
+                                <rect key="frame" x="0.0" y="44" width="375" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="rLu-zH-uzw"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" id="p4N-Af-8iw">
+                                        <searchBar key="customView" contentMode="redraw" id="Vqz-Zv-8Wp">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="42"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </searchBar>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iuY-nL-eyP">
                                 <rect key="frame" x="16" y="86" width="343" height="180"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -673,22 +688,11 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="oaX-LG-dP6" id="DCg-ha-Pu4"/>
+                                    <outlet property="delegate" destination="oaX-LG-dP6" id="r0a-WT-3Kt"/>
+                                </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EXj-fh-zsh">
-                                <rect key="frame" x="0.0" y="44" width="375" height="42"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="rLu-zH-uzw"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem style="plain" id="p4N-Af-8iw">
-                                        <searchBar key="customView" contentMode="redraw" id="Vqz-Zv-8Wp">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="42"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </searchBar>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HkC-qr-weY">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <connections>
@@ -726,6 +730,7 @@
                         <outlet property="autoCompleteTableView" destination="iuY-nL-eyP" id="bOF-YG-dxo"/>
                         <outlet property="mapView" destination="HkC-qr-weY" id="ell-an-EJn"/>
                         <outlet property="mapViewContentView" destination="H0w-C0-lan" id="VI9-SH-rFU"/>
+                        <outlet property="toolBar" destination="EXj-fh-zsh" id="Zns-nL-Pzh"/>
                         <segue destination="nuO-XY-Kz2" kind="show" identifier="EditLocation" id="RRE-3Q-zSr"/>
                     </connections>
                 </viewController>
@@ -754,7 +759,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RRE-3Q-zSr"/>
+        <segue reference="YER-tk-9nt"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="compass" width="21.5" height="21.5"/>

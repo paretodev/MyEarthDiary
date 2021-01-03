@@ -58,12 +58,6 @@ class LocationDetailViewController: UITableViewController {
     @IBOutlet weak var labelNamedAdress: UILabel!
     var kAddressLabel : KRWordWrapLabel?
     
-    
-//    //Cycle inside LocationTwitter; building could produce unreliable results.
-//    Cycle details:
-//    → Target 'LocationTwitter': CodeSign /Users/sucky/Library/Developer/Xcode/DerivedData/MyEarthDiary-avkcpjjgscrgfzewmkhqibqxykhw/Build/Products/Debug-iphoneos/LocationTwitter.app
-//    ○ Target 'LocationTwitter' has copy command from '/Users/sucky/Library/Developer/Xcode/DerivedData/MyEarthDiary-avkcpjjgscrgfzewmkhqibqxykhw/Build/Products/Debug-iphoneos/LocationTwitter.app' to '/Users/sucky/Library/Developer/Xcode/DerivedData/MyEarthDiary-avkcpjjgscrgfzewmkhqibqxykhw/Build/Products/Debug-iphoneos/LocationTwitter.app/LocationTwitter.app'
-//    //
     //MARK: - Initail Set up
     override func viewDidLoad() {
 //        print("LocatoinDetailVC view did load executed.")
@@ -450,8 +444,10 @@ extension LocationDetailViewController : UITextViewDelegate {
         }
     }
     
+    
     // MARK: - Resigner FirstResponder, In Case Of Touching Outside Twit Cell.
     @objc func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
+        
       let point = gestureRecognizer.location(in: tableView)
       let indexPath = tableView.indexPathForRow(at: point)
       //
@@ -461,7 +457,6 @@ extension LocationDetailViewController : UITextViewDelegate {
             }
             nameOfLocationTextFeild.resignFirstResponder()
         }
-        //
         else if twitterTextView.isFirstResponder{
             if indexPath != nil, indexPath!.section == 2, indexPath!.row == 2 {
               return
@@ -469,6 +464,8 @@ extension LocationDetailViewController : UITextViewDelegate {
             twitterTextView.resignFirstResponder()
         }
     }
+    
+    
     //
     func listenForBackgroundNotification() {
         if #available(iOS 13.0, *) {

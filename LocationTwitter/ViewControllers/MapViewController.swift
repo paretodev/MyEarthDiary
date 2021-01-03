@@ -2,13 +2,14 @@ import UIKit
 import MapKit
 import CoreData
 
-class MapViewController: UIViewController, MKLocalSearchCompleterDelegate {
+class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITableViewDelegate, UITableViewDataSource  {
     
     //MARK:-UI Controls
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet var mapViewContentView: UIView!
     @IBOutlet weak var autoCompleteTableView: UITableView!
     @IBOutlet weak var addressSearchBar: UISearchBar!
+    @IBOutlet weak var toolBar: UIToolbar!
     
     //MARK:- Ins Vars
   var locations = [Location]()
@@ -26,6 +27,7 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate {
   }
     var currentAutoCompletionResults :  [MKLocalSearchCompletion]
     = []
+    var currentLocationMapItem : MKMapItem?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -43,14 +45,24 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate {
     self.searchCompleter =  MKLocalSearchCompleter()
     self.searchCompleter!.delegate = self
     self.searchCompleter!.region = self.mapView.region
-    //MARK:- AutoCompleteTable Config.
-    self.autoCompleteTableView.delegate = self
-    let constraint1 = NSLayoutConstraint(item: self.autoCompleteTableView, attribute: .leading, relatedBy: .equal, toItem: self.addressSearchBar, attribute: .leading, multiplier: 1.0, constant: 0.0)
-    let constraint2 = NSLayoutConstraint(item: self.autoCompleteTableView, attribute: .trailing, relatedBy: .equal, toItem: self.addressSearchBar, attribute: .trailing, multiplier: 1.0, constant: 0.0)
-    mapViewContentView.addConstraints( [constraint1, constraint2] )
+    //MARK:- AutoCompleteTable Configs
+    view.bringSubviewToFront(self.autoCompleteTableView)
+    view.bringSubviewToFront(self.toolBar)
     //
     autoCompleteTableView.isHidden = true
+    autoCompleteTableView.delegate = self
+    //
+    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideSearchOptionsTable))
+    gestureRecognizer.cancelsTouchesInView = false
+    mapView.addGestureRecognizer(gestureRecognizer)
+    //
   }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let constraint1 = NSLayoutConstraint(item: self.autoCompleteTableView, attribute: .leading, relatedBy: .equal, toItem: self.addressSearchBar, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let constraint2 = NSLayoutConstraint(item: self.autoCompleteTableView, attribute: .trailing, relatedBy: .equal, toItem: self.addressSearchBar, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+        mapViewContentView.addConstraints( [constraint1, constraint2] )
+    }
     
   // MARK: - Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -239,40 +251,99 @@ extension MapViewController: MKMapViewDelegate {
         return false
     }
     
+    func setRegion(on coordinate : CLLocationCoordinate2D){
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 3200, longitudinalMeters: 3200)
+        mapView.setRegion(region, animated: true)
+    }
+    
+    //
+    // MARK: - mapview tapped -> if tableview is visible -> invisible
+    @objc func hideSearchOptionsTable(_ gestureRecognizer: UIGestureRecognizer) {
+        if autoCompleteTableView.isHidden == false {
+            autoCompleteTableView.isHidden = true
+        }
+        if addressSearchBar.isFirstResponder == true{
+            addressSearchBar.resignFirstResponder()
+        }
+    }
+    
     // MARK: - End of Extension mapview
 }
 
 extension MapViewController : UISearchBarDelegate {
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        //
+    //
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("text did change called")
         guard !searchBar.text!.isEmpty else{ return }
         //MARK:- Make Request And Get Auto Completed Location Objs
         self.searchCompleter!.queryFragment = searchBar.text!
         self.currentAutoCompletionResults =  self.searchCompleter!.results
-        
         //MARK: - Display the text of auto completed results into table view
         self.autoCompleteTableView.isHidden = false
+        self.autoCompleteTableView.reloadData()
     }
+    //
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        print("text did change called")
+        guard !searchBar.text!.isEmpty else{ return }
+        //MARK:- Make Request And Get Auto Completed Location Objs
+        self.searchCompleter!.queryFragment = searchBar.text!
+        self.currentAutoCompletionResults =  self.searchCompleter!.results
+        //MARK: - Display the text of auto completed results into table view
+        self.autoCompleteTableView.isHidden = false
+        self.autoCompleteTableView.reloadData()
+    }
+    
+    //
 }
 
 
-extension MapViewController : UITableViewDelegate, UITableViewDataSource{
+extension MapViewController {
     
-    //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //
         let cell = tableView.dequeueReusableCell(withIdentifier: "AutoCompleteCell")!
         let result = self.currentAutoCompletionResults[indexPath.row]
-        let titleLabel =  cell.viewWithTag(100) as! UILabel
-        let subtitleLable =  cell.viewWithTag(101) as! UILabel
-        titleLabel.text = result.title
-        subtitleLable.text = result.subtitle
+        //
+        cell.textLabel?.text = result.title
+        cell.detailTextLabel?.text = result.subtitle
+        //
         return cell
+        //
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.currentAutoCompletionResults.count
+        print( self.currentAutoCompletionResults.count )
+        return self.currentAutoCompletionResults.count
     }
-    
     //
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //
+        tableView.deselectRow(at: indexPath, animated: true)
+        let selectedResult = currentAutoCompletionResults[indexPath.row]
+        let searchRequest = MKLocalSearch.Request(completion: selectedResult)
+        searchRequest.region = mapView.region
+        let search = MKLocalSearch(request: searchRequest)
+        search.start { (response, error) in
+            guard let response = response else {
+                return
+            }
+            //
+            print("there are \(response.mapItems.count) results for clicked location.")
+            //
+            guard !response.mapItems.isEmpty else {
+                print("not a valid address")
+                return
+            }
+            //
+            let targetLocationMapItem = response.mapItems[0]
+            self.currentLocationMapItem = targetLocationMapItem
+            //
+            self.addressSearchBar.text = targetLocationMapItem.name ?? ""
+            tableView.isHidden = true
+            //
+            self.setRegion(on: targetLocationMapItem.placemark.coordinate )
+            //
+        }
+    }
 }
+
