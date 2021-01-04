@@ -1,5 +1,5 @@
-# 업데이트 
-## MyEarthDiary -> Blog On Map 
+# 앱을 업데이트 하였습니다.
+## MyEarthDiary -> < Blog On Map > 
 ### 참고 : https://www.notion.so/fundamentaldeveloper/57f12bb3cde047a99927a429a2583a4a
 
 유저가
