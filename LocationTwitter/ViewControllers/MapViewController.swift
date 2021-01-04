@@ -38,6 +38,7 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
         return CLGeocoder()
     }()
     var currentCenterAnnotation : CurrentCenterLocation?
+    var tillNowMapAddedCenterAnnotations : [CurrentCenterLocation] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -205,7 +206,7 @@ extension MapViewController: MKMapViewDelegate {
             if let searchedAnnotationView = searchedAnnotationView {
                     // MARK: - 주석 내용 넣기
                     searchedAnnotationView.annotation = annotation
-                    ( searchedAnnotationView as! MKPinAnnotationView ).pinTintColor = UIColor(named: "tblue")
+                ( searchedAnnotationView as! MKPinAnnotationView ).pinTintColor = UIColor(named:"tblue")
                 }
             return searchedAnnotationView
         }
@@ -216,23 +217,23 @@ extension MapViewController: MKMapViewDelegate {
             var centerAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
             //없었을 경우
             if centerAnnotationView == nil {
-                let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                pinView.isEnabled = true
-                pinView.canShowCallout = true
+                let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView.isEnabled = true
+                annotationView.canShowCallout = true
+                annotationView.image = UIImage(named: "tag")!
                 let rightButton = UIButton(type: .contactAdd )
-                rightButton.tintColor = UIColor.darkGray
+                rightButton.tintColor = UIColor(named: "tblue")
                 rightButton.addTarget(
                     self,
                     action: #selector( performSegueForCenterUpdate ), // perform segue
                     for: .touchUpInside
                 )
-                pinView.rightCalloutAccessoryView = rightButton
-                centerAnnotationView = pinView
+                annotationView.rightCalloutAccessoryView = rightButton
+                centerAnnotationView = annotationView
             }
             if let centerAnnotationView = centerAnnotationView {
                     // MARK: - 주석 내용 넣기
                     centerAnnotationView.annotation = annotation
-                ( centerAnnotationView as! MKPinAnnotationView ).pinTintColor = UIColor.darkGray
                 }
             return centerAnnotationView
         }
@@ -320,7 +321,8 @@ extension MapViewController: MKMapViewDelegate {
     // MARK: - Calculate Zoom Out Level & If pinch out or in detected Configure Annotations Accordinly
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         
-        mapView.removeAnnotations( mapView.annotations.filter{ $0 is CurrentCenterLocation } )
+        mapView.removeAnnotations( tillNowMapAddedCenterAnnotations )
+        tillNowMapAddedCenterAnnotations = [] //MARK:- Reset
         
         self.updatedMapViewCenter = self.mapView.centerCoordinate
         //
@@ -359,6 +361,7 @@ extension MapViewController: MKMapViewDelegate {
                             if addressString.isEmpty { addressString = "미등록 주소".localized()}
                             currentCenterLocation.subtitle = addressString
                             self.mapView.addAnnotation( currentCenterLocation )
+                            self.tillNowMapAddedCenterAnnotations.append( currentCenterLocation )
                         }
                     }
                 }
