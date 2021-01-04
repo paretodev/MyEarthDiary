@@ -10,7 +10,7 @@ import CoreData
 import CoreLocation
 import YPImagePicker
 import KRWordWrapLabel
-
+// 플레이스마크,
 class LocationDetailViewController: UITableViewController {
     
     //MARK:- Ins Vars
@@ -69,6 +69,7 @@ class LocationDetailViewController: UITableViewController {
         
         // MARK: - Edit Only
         if let locationToEdit = locationToEdit {
+            navigationItem.title = "이 장소에 남긴 내 블로그".localized()
             nameOfLocationTextFeild.text = locationToEdit.name
             locationCategoryName = locationToEdit.category
             locationCategoryLabel.text = locationToEdit.category.localized()
@@ -83,15 +84,24 @@ class LocationDetailViewController: UITableViewController {
         // MARK: - 1). Common
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44 // Something reasonable to help ios render your cells
+        
             // 1). Scroll View's Delegate Regi.
         locationGalleryScrollView.delegate = self
         galleryPageControl.pageIndicatorTintColor = .gray
         galleryPageControl.currentPageIndicatorTintColor = .lightGray
+        
             // 2). Configure Date, Address Labels.
         kAddressLabel = KRWordWrapLabel()
         kAddressLabel!.lineBreakMode = .byWordWrapping
         kAddressLabel!.numberOfLines = 0
-        kAddressLabel!.text = string(from: placemark)
+         let str = string(from: placemark)
+        if str.isEmpty {
+            kAddressLabel!.text = "미등록 주소".localized()
+        }
+        else{
+            kAddressLabel!.text = str
+        }
+        
             // 3). Add Constraints
         addressLabelMotherView.addSubview(kAddressLabel!)
         kAddressLabel!.translatesAutoresizingMaskIntoConstraints = false
@@ -205,7 +215,9 @@ class LocationDetailViewController: UITableViewController {
             let image = (sender as! UIImageView).image!
             //
             controller.image = image
-            controller.photoName = self.nameOfLocationTextFeild.text!
+            controller.delegate = self
+            controller.photoName = nameOfLocationTextFeild.text
+            controller.imageName = locationPhotos[ self.galleryPageControl.currentPage ]
             //MARK:-빈 텍스트가 넘어가도 오류가 나지 않는지 파악하기
         }
     }
@@ -259,7 +271,7 @@ class LocationDetailViewController: UITableViewController {
         // 1). placeholder set up
     func placeholderSetting() {
         twitterTextView.delegate = self // txtvReview가 유저가 선언한 outlet
-        twitterTextView.text = "이 장소에 대한 트윗을 남겨보세요🎤".localized()
+        twitterTextView.text = "이 장소에 대한 블로그를 남겨보세요🗣".localized()
         twitterTextView.textColor = UIColor.lightGray
     }
         //2). configure page control <-> scrollView
@@ -272,9 +284,11 @@ class LocationDetailViewController: UITableViewController {
         // 스크롤뷰 초기화
         for subview in locationGalleryScrollView.subviews {
             subview.removeFromSuperview()
-//            print("begin gallery set up. Removed all the image views. removed view type :  \(type(of: subview))")
         }
-        //
+        if locationPhotos.isEmpty {
+            locationPhotos.append("noImage")
+        }
+        // Config Start
         galleryPageControl.numberOfPages = locationPhotos.count
         //
         locationGalleryScrollView.contentSize = CGSize(
@@ -434,13 +448,15 @@ extension LocationDetailViewController : UITextViewDelegate {
     // TextView Place Holder
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = "이 장소에 대한 트윗을 남겨보세요🎤".localized()
+            textView.text = "이 장소에 대한 블로그를 남겨보세요🗣".localized()
             textView.textColor = UIColor.lightGray
         }
     }
     
+    
     // MARK: - Resigner FirstResponder, In Case Of Touching Outside Twit Cell.
     @objc func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
+        
       let point = gestureRecognizer.location(in: tableView)
       let indexPath = tableView.indexPathForRow(at: point)
       //
@@ -450,7 +466,6 @@ extension LocationDetailViewController : UITextViewDelegate {
             }
             nameOfLocationTextFeild.resignFirstResponder()
         }
-        //
         else if twitterTextView.isFirstResponder{
             if indexPath != nil, indexPath!.section == 2, indexPath!.row == 2 {
               return
@@ -458,6 +473,8 @@ extension LocationDetailViewController : UITextViewDelegate {
             twitterTextView.resignFirstResponder()
         }
     }
+    
+    
     //
     func listenForBackgroundNotification() {
         if #available(iOS 13.0, *) {
@@ -482,4 +499,21 @@ extension LocationDetailViewController : UITextViewDelegate {
     // MARK:- End of VC
 }
 
+extension LocationDetailViewController : PhotoViewerViewControllerDelegate {
+    func deleteThisPhoto(_ photoName: String) {
+        //
+        guard photoName != "noImage" else {
+            navigationController?.popViewController(animated: true)
+            return
+        }
+        //
+        locationPhotos = locationPhotos.filter{ $0 != "\(photoName)"}
+        let url = applicationDocumentsDirectory.appendingPathComponent( "image-\(photoName).jpg", isDirectory: false )
+        removeFileAtUrl(url)
+        print("delete file at : \(url.description) succeeded.")
+        //
+        configureGalleryScrollView()
+        navigationController?.popViewController(animated: true)
+    }
+}
 

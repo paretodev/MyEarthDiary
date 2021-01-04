@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>MyEarthDiary</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -21,11 +23,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>사진을 찍어서 올리시려면, 카메라 접근을 허용해주세요.</string>
+	<string>이 장소 갤러리에 사진을 찍어서 올리시려면 카메라 접근을 허용해주세요.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>이 앱의 주요 기능은 위치 기반으로 진행됩니다.</string>
+	<string>이 앱은 사용자의 위치를 감지하여 그 위치에 대한 갤러리와 블로그를 남기는 앱입니다. 앱의 주요 기능을 사용하시려면, 위치 서비스를 활성화 해주세요.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>사진을 앨범에서 선택해서 올리시려면, 앨범에 접근을 허용해주세요.</string>
+	<string>이 장소 갤러리에 사진을 앨범에서 선택해서 올리시려면 앨범에 접근을 허용해주세요.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
