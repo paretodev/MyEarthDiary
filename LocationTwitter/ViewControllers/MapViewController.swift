@@ -356,7 +356,10 @@ extension MapViewController: MKMapViewDelegate {
                             self.currentCenterPlacemark = responsePlacemark
                             let currentCenterLocation = CurrentCenterLocation()
                             currentCenterLocation.coordinate = responsePlacemark.location!.coordinate
-                            currentCenterLocation.title = "현재 지도 위치".localized()
+                            currentCenterLocation.title = responsePlacemark.name ?? "미등록".localized()
+                            if currentCenterLocation.title!.isEmpty {
+                                currentCenterLocation.title = "미등록".localized()
+                            }
                             var addressString = string(from: responsePlacemark )
                             if addressString.isEmpty { addressString = "미등록 주소".localized()}
                             currentCenterLocation.subtitle = addressString
