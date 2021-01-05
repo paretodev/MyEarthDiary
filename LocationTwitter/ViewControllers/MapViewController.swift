@@ -61,19 +61,21 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
     view.bringSubviewToFront(self.autoCompleteTableView)
     view.bringSubviewToFront(self.toolBar)
     //
-    autoCompleteTableView.isHidden = true
     autoCompleteTableView.delegate = self
     //
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideSearchOptionsTable))
     gestureRecognizer.cancelsTouchesInView = false
     mapView.addGestureRecognizer(gestureRecognizer)
     //
+    autoCompleteTableView.isHidden = true
+    autoCompleteTableView.layer.cornerRadius = 5
+    //
   }
     
     override func viewDidAppear(_ animated: Bool) {
         let constraint1 = NSLayoutConstraint(item: self.autoCompleteTableView, attribute: .leading, relatedBy: .equal, toItem: self.addressSearchBar, attribute: .leading, multiplier: 1.0, constant: 0.0)
         let constraint2 = NSLayoutConstraint(item: self.autoCompleteTableView, attribute: .trailing, relatedBy: .equal, toItem: self.addressSearchBar, attribute: .trailing, multiplier: 1.0, constant: 0.0)
-        mapViewContentView.addConstraints( [constraint1, constraint2] )
+        self.mapViewContentView.addConstraints( [constraint1, constraint2] )
     }
     
   // MARK: - Navigation
@@ -356,10 +358,7 @@ extension MapViewController: MKMapViewDelegate {
                             self.currentCenterPlacemark = responsePlacemark
                             let currentCenterLocation = CurrentCenterLocation()
                             currentCenterLocation.coordinate = responsePlacemark.location!.coordinate
-                            currentCenterLocation.title = responsePlacemark.name ?? "미등록".localized()
-                            if currentCenterLocation.title!.isEmpty {
-                                currentCenterLocation.title = "미등록".localized()
-                            }
+                            currentCenterLocation.title = "여기에 블로그 작성 📷".localized()
                             var addressString = string(from: responsePlacemark )
                             if addressString.isEmpty { addressString = "미등록 주소".localized()}
                             currentCenterLocation.subtitle = addressString

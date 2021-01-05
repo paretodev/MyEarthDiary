@@ -656,7 +656,7 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iuY-nL-eyP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iuY-nL-eyP">
                                 <rect key="frame" x="16" y="86" width="343" height="180"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -726,10 +726,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addressSearchBar" destination="Vqz-Zv-8Wp" id="rM2-I6-7rL"/>
-                        <outlet property="autoCompleteTableView" destination="iuY-nL-eyP" id="bOF-YG-dxo"/>
+                        <outlet property="addressSearchBar" destination="Vqz-Zv-8Wp" id="ZEy-Ez-cZs"/>
+                        <outlet property="autoCompleteTableView" destination="iuY-nL-eyP" id="FI6-Wv-CCF"/>
                         <outlet property="mapView" destination="HkC-qr-weY" id="ell-an-EJn"/>
-                        <outlet property="mapViewContentView" destination="H0w-C0-lan" id="VI9-SH-rFU"/>
+                        <outlet property="mapViewContentView" destination="H0w-C0-lan" id="PXK-UD-yIT"/>
                         <outlet property="toolBar" destination="EXj-fh-zsh" id="Zns-nL-Pzh"/>
                         <segue destination="nuO-XY-Kz2" kind="show" identifier="EditLocation" id="RRE-3Q-zSr"/>
                         <segue destination="nuO-XY-Kz2" kind="show" identifier="AddLocation" id="ZNY-lP-TWH"/>
