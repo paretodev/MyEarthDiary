@@ -4,7 +4,7 @@
   Created by 한석희 on 12/23/20.
 */
 
-"NSLocationWhenInUseUsageDescription" = "This App helps you search your present position and, write a blog and, make a gallery about that location. You need to activate the location service to use this app.";
-"NSCameraUsageDescription" = "If you want to upload photos on the location gallery with the camera, allow the access." ;
-"NSPhotoLibraryUsageDescription" = "If you want to upload photos on the location gallery from the photo library, allow the access" ;
+"NSLocationWhenInUseUsageDescription" = "This App helps you search your present position and, write a blog and, make a gallery about that location. You need to activate the location service to use this app. This App doesn't collect users' data separately. Feel safe.";
+"NSCameraUsageDescription" = "If you want to upload photos on the location gallery with the camera, allow the access.  This App doesn't collect users' data separately. Feel safe." ;
+"NSPhotoLibraryUsageDescription" = "If you want to upload photos on the location gallery from the photo library, allow the access.  This App doesn't collect users' data separately. Feel safe." ;
 "CFBundleDisplayName" = "Blog On Map";

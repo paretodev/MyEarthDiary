@@ -532,7 +532,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장소 이름" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3y-6r-Mpm">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="장소 이름" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3y-6r-Mpm">
                                 <rect key="frame" x="0.0" y="90.5" width="375" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -544,10 +544,10 @@
                         <constraints>
                             <constraint firstItem="9mQ-GG-hIv" firstAttribute="centerX" secondItem="NFd-8d-ED0" secondAttribute="centerX" id="18K-0w-I9w"/>
                             <constraint firstItem="9mQ-GG-hIv" firstAttribute="leading" secondItem="X9f-kl-M4r" secondAttribute="leading" id="Foa-P0-Xdg"/>
-                            <constraint firstItem="9mQ-GG-hIv" firstAttribute="top" secondItem="N3y-6r-Mpm" secondAttribute="bottom" constant="35" id="JAG-33-dx3"/>
+                            <constraint firstItem="9mQ-GG-hIv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="N3y-6r-Mpm" secondAttribute="bottom" constant="10" id="JAG-33-dx3"/>
                             <constraint firstItem="9mQ-GG-hIv" firstAttribute="centerY" secondItem="NFd-8d-ED0" secondAttribute="centerY" id="Wnd-gc-JTR"/>
                             <constraint firstItem="X9f-kl-M4r" firstAttribute="trailing" secondItem="9mQ-GG-hIv" secondAttribute="trailing" id="aTp-D5-enq"/>
-                            <constraint firstItem="N3y-6r-Mpm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="X9f-kl-M4r" secondAttribute="top" constant="20" id="kQ0-Xj-MBQ"/>
+                            <constraint firstItem="N3y-6r-Mpm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="X9f-kl-M4r" secondAttribute="top" constant="10" id="kQ0-Xj-MBQ"/>
                             <constraint firstItem="N3y-6r-Mpm" firstAttribute="leading" secondItem="X9f-kl-M4r" secondAttribute="leading" id="pXe-Yw-qmh"/>
                             <constraint firstItem="X9f-kl-M4r" firstAttribute="trailing" secondItem="N3y-6r-Mpm" secondAttribute="trailing" id="q7d-RR-GnL"/>
                         </constraints>
