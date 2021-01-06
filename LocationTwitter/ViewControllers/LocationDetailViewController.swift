@@ -10,7 +10,7 @@ import CoreData
 import CoreLocation
 import YPImagePicker
 import KRWordWrapLabel
-
+// 플레이스마크,
 class LocationDetailViewController: UITableViewController {
     
     //MARK:- Ins Vars
@@ -58,12 +58,6 @@ class LocationDetailViewController: UITableViewController {
     @IBOutlet weak var labelNamedAdress: UILabel!
     var kAddressLabel : KRWordWrapLabel?
     
-    
-//    //Cycle inside LocationTwitter; building could produce unreliable results.
-//    Cycle details:
-//    → Target 'LocationTwitter': CodeSign /Users/sucky/Library/Developer/Xcode/DerivedData/MyEarthDiary-avkcpjjgscrgfzewmkhqibqxykhw/Build/Products/Debug-iphoneos/LocationTwitter.app
-//    ○ Target 'LocationTwitter' has copy command from '/Users/sucky/Library/Developer/Xcode/DerivedData/MyEarthDiary-avkcpjjgscrgfzewmkhqibqxykhw/Build/Products/Debug-iphoneos/LocationTwitter.app' to '/Users/sucky/Library/Developer/Xcode/DerivedData/MyEarthDiary-avkcpjjgscrgfzewmkhqibqxykhw/Build/Products/Debug-iphoneos/LocationTwitter.app/LocationTwitter.app'
-//    //
     //MARK: - Initail Set up
     override func viewDidLoad() {
 //        print("LocatoinDetailVC view did load executed.")
@@ -90,15 +84,24 @@ class LocationDetailViewController: UITableViewController {
         // MARK: - 1). Common
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44 // Something reasonable to help ios render your cells
+        
             // 1). Scroll View's Delegate Regi.
         locationGalleryScrollView.delegate = self
         galleryPageControl.pageIndicatorTintColor = .gray
         galleryPageControl.currentPageIndicatorTintColor = .lightGray
+        
             // 2). Configure Date, Address Labels.
         kAddressLabel = KRWordWrapLabel()
         kAddressLabel!.lineBreakMode = .byWordWrapping
         kAddressLabel!.numberOfLines = 0
-        kAddressLabel!.text = string(from: placemark)
+         let str = string(from: placemark)
+        if str.isEmpty {
+            kAddressLabel!.text = "미등록 주소".localized()
+        }
+        else{
+            kAddressLabel!.text = str
+        }
+        
             // 3). Add Constraints
         addressLabelMotherView.addSubview(kAddressLabel!)
         kAddressLabel!.translatesAutoresizingMaskIntoConstraints = false
@@ -450,8 +453,10 @@ extension LocationDetailViewController : UITextViewDelegate {
         }
     }
     
+    
     // MARK: - Resigner FirstResponder, In Case Of Touching Outside Twit Cell.
     @objc func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
+        
       let point = gestureRecognizer.location(in: tableView)
       let indexPath = tableView.indexPathForRow(at: point)
       //
@@ -461,7 +466,6 @@ extension LocationDetailViewController : UITextViewDelegate {
             }
             nameOfLocationTextFeild.resignFirstResponder()
         }
-        //
         else if twitterTextView.isFirstResponder{
             if indexPath != nil, indexPath!.section == 2, indexPath!.row == 2 {
               return
@@ -469,6 +473,8 @@ extension LocationDetailViewController : UITextViewDelegate {
             twitterTextView.resignFirstResponder()
         }
     }
+    
+    
     //
     func listenForBackgroundNotification() {
         if #available(iOS 13.0, *) {

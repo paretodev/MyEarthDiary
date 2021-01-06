@@ -32,6 +32,7 @@ class PhotoViewerViewController: UIViewController {
         }
         //
         deleteButton.title = "삭제".localized()
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([.foregroundColor: UIColor.systemPink], for: .normal)
         //
     }
     
@@ -40,6 +41,7 @@ class PhotoViewerViewController: UIViewController {
         photoImageView.layer.cornerRadius = 8
         photoImageView.layer.masksToBounds = true
         photoImageView.image = image.resized(withBounds: photoImageView.bounds.size)
+        
     }
     
     @IBAction func cancel(){
@@ -50,13 +52,17 @@ class PhotoViewerViewController: UIViewController {
         //MARK:-Controller
         let alertController = UIAlertController(title: "Asking For Confirm".localized(), message: "Do you confirm deleting this photo?".localized(), preferredStyle: .alert)
         //MARK:-Action1
-        var alertAction = UIAlertAction( title: "yes".localized(), style: .default ){ _ in
-            self.delegate.deleteThisPhoto(self.imageName)
+        var alertAction = UIAlertAction( title: "yes".localized(), style: .default ){ [weak self]_ in
+            if let weakSelf = self {
+                weakSelf.delegate.deleteThisPhoto(weakSelf.imageName)
+            }
         }
         alertController.addAction(alertAction)
         //MARK:-Action2
-        alertAction = UIAlertAction( title: "cancel".localized(), style: .default ){ _ in
-            alertController.removeFromParent()
+        alertAction = UIAlertAction( title: "cancel".localized(), style: .default ){ [weak alertController ] _ in
+            if let controller = alertController {
+                controller.removeFromParent()
+            }
         }
         alertController.addAction(alertAction)
         //MARK:-present it

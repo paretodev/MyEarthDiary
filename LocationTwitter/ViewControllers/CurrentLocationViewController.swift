@@ -281,6 +281,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             }
         }
     }
+    
         //6).
     func loadSoundEffect(_ name: String) {
       if let path = Bundle.main.path(forResource: name, ofType: nil) {
