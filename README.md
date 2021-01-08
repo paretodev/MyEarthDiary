@@ -1,8 +1,7 @@
 # Blog On Map앱 (iOS)
 
-[문법 참고](https://simhyejin.github.io/2016/06/30/Markdown-syntax/)
 <br>
-<br>
+
 ![](./images/2021-01-08-10-35-42.png)
 <br>
 
