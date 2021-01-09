@@ -51,13 +51,15 @@ var applicationDocumentsDirectory: URL = {
 
 //MARK: - Handle Core Data Error -> Get Notification
 let dataSaveFailedNotification = Notification.Name("DataSaveFailedNotification") // name of notification
-
+//
 func fatalCoreDataError(_ error : Error){
-//    print("Fatal error : \(error)")
+    
+    print("Fatal error : \(error)")
     NotificationCenter.default.post(
         name: dataSaveFailedNotification,
         object: nil
     )
+    
 }
 
 //

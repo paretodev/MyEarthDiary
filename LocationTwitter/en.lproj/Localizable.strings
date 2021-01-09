@@ -59,7 +59,7 @@
 "편집" = "Edit";
 "내부 에러" = "Internal Error";
 "데이터 저장 중 에러가 발생했습니다." = "Error Occured while saving data. We will soon figure out and update the app.";
-"확인" = "okay";
+"확인" = "Ok";
 "삭제" = "delete";
 "예" = "yes";
 "현재 지도 위치" = "Present Map Center";
@@ -75,3 +75,7 @@
 "놀거리" = "Play";
 "미등록" = "Unregistered";
 "여기에 블로그 작성 📷" = "Blog This Spot 📷";
+"네트워크 문제" = "Network Problem";
+"네트워크 연결 상황이 좋지 않습니다. 이 경우 에임 태그가 정상적으로 작동하지 않습니다." = "Network Connection is not in good condition. In this case, the aim tag does not work.";
+"좋지 않은 네트워크 상황" = "Bad Network" ;
+"네트워크가 느릴 경우 에임 태그가 지연되어 설치될 수 있습니다 🎯" = "Slow Network could delay setting of Aim Tag 🎯";
