@@ -2,16 +2,18 @@ import UIKit
 import MapKit
 import CoreData
 import CoreLocation
+import Foundation
 
 class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITableViewDelegate, UITableViewDataSource  {
-    
+
     //MARK:-UI Controls
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet var mapViewContentView: UIView!
     @IBOutlet weak var autoCompleteTableView: UITableView!
     @IBOutlet weak var addressSearchBar: UISearchBar!
     @IBOutlet weak var toolBar: UIToolbar!
-    
+
+
     //MARK:- Ins Vars
   var locations = [Location]()
   var zoomOutLevel : Int?
@@ -39,6 +41,15 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
     }()
     var currentCenterAnnotation : CurrentCenterLocation?
     var tillNowMapAddedCenterAnnotations : [CurrentCenterLocation] = []
+    var hasNoticedNetworkAimTagIssue = false
+    let formatter : DateComponentsFormatter =  {
+        let formatterPre = DateComponentsFormatter()
+        formatterPre.allowedUnits = [.second]
+        formatterPre.unitsStyle = .full
+        return formatterPre
+    }()
+    var noticedSlowNetwork = false
+    var initialAimTagSet = false
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -61,21 +72,38 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
     view.bringSubviewToFront(self.autoCompleteTableView)
     view.bringSubviewToFront(self.toolBar)
     //
-    autoCompleteTableView.isHidden = true
     autoCompleteTableView.delegate = self
     //
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideSearchOptionsTable))
     gestureRecognizer.cancelsTouchesInView = false
     mapView.addGestureRecognizer(gestureRecognizer)
     //
+    autoCompleteTableView.isHidden = true
+    autoCompleteTableView.layer.cornerRadius = 5
+    //
   }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         let constraint1 = NSLayoutConstraint(item: self.autoCompleteTableView, attribute: .leading, relatedBy: .equal, toItem: self.addressSearchBar, attribute: .leading, multiplier: 1.0, constant: 0.0)
         let constraint2 = NSLayoutConstraint(item: self.autoCompleteTableView, attribute: .trailing, relatedBy: .equal, toItem: self.addressSearchBar, attribute: .trailing, multiplier: 1.0, constant: 0.0)
-        mapViewContentView.addConstraints( [constraint1, constraint2] )
+        self.mapViewContentView.addConstraints( [constraint1, constraint2] )
+        //MARK:- First Update Starts
+            // 3초 후에 비동기 스케줄링
+        print("View Did Appear and scheduled")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            if !self.initialAimTagSet && !self.hasNoticedNetworkAimTagIssue && !self.noticedSlowNetwork {
+                print("Satisfied Condition")
+                let alert = makeAlert(withTitle: "좋지 않은 네트워크 상황".localized() , withContents: "네트워크가 느릴 경우 에임 태그가 지연되어 설치될 수 있습니다 🎯".localized())
+                let action = UIAlertAction(title: "확인".localized(), style: .default){_ in
+                    alert.removeFromParent()
+                }
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+                self.noticedSlowNetwork = true
+            }
+        }
     }
-    
+
   // MARK: - Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     //
@@ -94,13 +122,13 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
         controller.managedObjectContext = self.managedObjectContext
     }
     else if segue.identifier == "AddFromCurrentCenter"{
-        
+
         let controller = segue.destination as! LocationDetailViewController
         controller.location = currentCenterPlacemark!.location
         controller.placemark = currentCenterPlacemark!
         controller.coordinate = currentCenterPlacemark!.location!.coordinate
         controller.managedObjectContext = self.managedObjectContext
-        
+
     }
   }
 
@@ -165,7 +193,7 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
   @objc func showLocationDetails(_ sender: UIButton) {
     performSegue(withIdentifier: "EditLocation", sender: sender)
   }
-    
+
     //
     @objc func performSegueForRecentSearch(){
         performSegue(withIdentifier: "AddLocation", sender: nil)
@@ -179,11 +207,11 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
 
 //MARK: - Mapview Delegating for making MK Annotation View <- MK Annotation
 extension MapViewController: MKMapViewDelegate {
-    
+
     // 1). main
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     guard annotation is Location else {
-        
+
         //MARK:- Location 출신의 Annotation이 아닐 경우
         if annotation is SearchedLocation {
             let identifier = "SearchedLocation"
@@ -234,20 +262,23 @@ extension MapViewController: MKMapViewDelegate {
             if let centerAnnotationView = centerAnnotationView {
                     // MARK: - 주석 내용 넣기
                     centerAnnotationView.annotation = annotation
-                }
+            }
+            //MARK:- 타임 아웃을 통해 유저의 네트워크 지연을 알아내기 위한 불 대수 값 변경
+            if !self.initialAimTagSet{
+                self.initialAimTagSet = true
+            }
             return centerAnnotationView
         }
-        
         //
         return nil
     }
-    
+
     //MARK: - Making Annotation From Another 2 VC.
     let identifier = "Location"
     var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
     // 새로운 핀 뷰 만들기
     if annotationView == nil {
-        
+
         let pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
         pinView.isEnabled = true
         pinView.canShowCallout = true
@@ -296,11 +327,11 @@ extension MapViewController: MKMapViewDelegate {
         //
         formatAnnotation(annotationView, for: self.mapView)
     }
-    
+
     //MARK: - Return MK Annotation View
     return annotationView
   }
-    
+
     // MARK: - Configure AnnotationView According to : 1/ZoomOutLevel
     func formatAnnotation(_ annotationView : MKAnnotationView, for map: MKMapView){
         if var zoomOutLevel = self.zoomOutLevel {
@@ -317,13 +348,13 @@ extension MapViewController: MKMapViewDelegate {
             annotationView.transform = CGAffineTransform( scaleX: CGFloat(scale), y: CGFloat(scale) )
         }
     }
-    
+
     // MARK: - Calculate Zoom Out Level & If pinch out or in detected Configure Annotations Accordinly
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        
+
         mapView.removeAnnotations( tillNowMapAddedCenterAnnotations )
         tillNowMapAddedCenterAnnotations = [] //MARK:- Reset
-        
+
         self.updatedMapViewCenter = self.mapView.centerCoordinate
         //
         let zoomWidth = mapView.visibleMapRect.size.width
@@ -340,45 +371,59 @@ extension MapViewController: MKMapViewDelegate {
         let nowLong = self.mapView.centerCoordinate.longitude
         //
         //MARK: - find placemark for coordinate - background thread schedule
-        DispatchQueue.global().async {
+DispatchQueue.global().async {
+    //
+    let stdLat = nowLat
+    let stdLong = nowLong
             //
-            let stdLat = nowLat
-            let stdLong = nowLong
-            //
-            self.geoCoder.reverseGeocodeLocation(  CLLocation(latitude: nowLat, longitude: nowLong) ){ placemarks, error in
-                if let error = error {
-                    return
+self.geoCoder.reverseGeocodeLocation(  CLLocation(latitude: nowLat, longitude: nowLong) ){ placemarks, error in
+    //MARK - Network Issue Notice
+    if let _ = error {
+        if !self.hasNoticedNetworkAimTagIssue{
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "네트워크 오류".localized(), message: "네트워크가 연결되어있지 않습니다. 이 경우 태그가 정상적으로 작동하지 않습니다.".localized(), preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인".localized(), style: .default){_ in
+                    alert.removeFromParent()
                 }
-                if let placemarks = placemarks {
-                    let responsePlacemark = placemarks.last!
-                    DispatchQueue.main.async {
-                        if ( self.updatedMapViewCenter!.longitude == stdLong && self.updatedMapViewCenter!.latitude == stdLat) {
-                            self.currentCenterPlacemark = responsePlacemark
-                            let currentCenterLocation = CurrentCenterLocation()
-                            currentCenterLocation.coordinate = responsePlacemark.location!.coordinate
-                            currentCenterLocation.title = "현재 지도 위치".localized()
-                            var addressString = string(from: responsePlacemark )
-                            if addressString.isEmpty { addressString = "미등록 주소".localized()}
-                            currentCenterLocation.subtitle = addressString
-                            self.mapView.addAnnotation( currentCenterLocation )
-                            self.tillNowMapAddedCenterAnnotations.append( currentCenterLocation )
-                        }
-                    }
-                }
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
+            self.hasNoticedNetworkAimTagIssue = true // 1회만 공지
         }
+        return
+    }
+    //MARK: - Network Works
+    if let placemarks = placemarks {
+        let responsePlacemark = placemarks.last!
+        DispatchQueue.main.async {
+            if ( self.updatedMapViewCenter!.longitude == stdLong && self.updatedMapViewCenter!.latitude == stdLat) {
+                //
+                self.currentCenterPlacemark = responsePlacemark
+                //
+                let currentCenterLocation = CurrentCenterLocation()
+                currentCenterLocation.coordinate = responsePlacemark.location!.coordinate
+                currentCenterLocation.title = "여기에 블로그 작성 📷".localized()
+                var addressString = string(from: responsePlacemark )
+                if addressString.isEmpty { addressString = "미등록 주소".localized()}
+                currentCenterLocation.subtitle = addressString
+                //
+                self.mapView.addAnnotation( currentCenterLocation )
+                self.tillNowMapAddedCenterAnnotations.append( currentCenterLocation )
+                //
+            }
+        }
+    }
+}
+        }
+    }
 
-        
-        //
-    }
-    }
-    
-    
+
     //
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         mapChangedFromUserInteraction = mapViewRegionDidChangeFromUserInteraction()
     }
     //
-    
+
     // MARK:- Helper Methods
     private func mapViewRegionDidChangeFromUserInteraction() -> Bool {
         let view = self.mapView.subviews[0]
@@ -391,12 +436,12 @@ extension MapViewController: MKMapViewDelegate {
         }
         return false
     }
-    
+
     func setRegion(on coordinate : CLLocationCoordinate2D){
         let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 3200, longitudinalMeters: 3200)
         mapView.setRegion(region, animated: true)
     }
-    
+
     //
     // MARK: - mapview tapped -> if tableview is visible -> invisible
     @objc func hideSearchOptionsTable(_ gestureRecognizer: UIGestureRecognizer) {
@@ -407,7 +452,7 @@ extension MapViewController: MKMapViewDelegate {
             addressSearchBar.resignFirstResponder()
         }
     }
-    
+
     // MARK: - End of Extension mapview
 }
 
@@ -432,13 +477,13 @@ extension MapViewController : UISearchBarDelegate {
         self.autoCompleteTableView.isHidden = false
         self.autoCompleteTableView.reloadData()
     }
-    
+
     //
 }
 
 
 extension MapViewController {
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         let cell = tableView.dequeueReusableCell(withIdentifier: "AutoCompleteCell")!
@@ -481,7 +526,7 @@ extension MapViewController {
             //
             self.addressSearchBar.text = targetLocationMapItem.name ?? ""
             tableView.isHidden = true
-            
+
            //MARK:- Make a new SearchedAnnotation Object and add annotation
             if let originalSearchedAnnotation = self.currentSearchedAnnotation{
                 self.mapView.removeAnnotation(originalSearchedAnnotation)
@@ -491,12 +536,12 @@ extension MapViewController {
             searchAnnoation.title = targetLocationMapItem.name
             searchAnnoation.subtitle = string(from: targetLocationMapItem.placemark)
             self.currentSearchedAnnotation = searchAnnoation
-            //
             self.mapView.addAnnotation(searchAnnoation)
-            //
             self.setRegion(on: targetLocationMapItem.placemark.coordinate )
             //
         }
     }
 }
+
+
 

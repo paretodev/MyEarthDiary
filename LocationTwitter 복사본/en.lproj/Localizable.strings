@@ -21,7 +21,7 @@
 "위치 가져오기 다시 시도" = "Retry Fetch Location";
 "위치 가져오기 다시 시도" = "Retry Fetch Location";
 "나의 위치 잡는 중" = "Fetching My Location";
-"위치 정확도 향상중" = "Improving Accuracy";
+"위치 정확도 향상중(중지 가능)" = "Improving Accuracy ( can stop )";
 "확인" = "ok";
 "위치 정보 가져오기 실패" = "Positioning Failed";
 "gps, 셀룰러, 와이파이 중 하나를 활성화 해주세요." = "Activate your Cellular Data or Wi-fi 🙏🏻" ;
@@ -59,9 +59,8 @@
 "편집" = "Edit";
 "내부 에러" = "Internal Error";
 "데이터 저장 중 에러가 발생했습니다." = "Error Occured while saving data. We will soon figure out and update the app.";
-"확인" = "okay";
+"확인" = "ok";
 "삭제" = "delete";
-"예" = "yes";
 "현재 지도 위치" = "Present Map Center";
 "미등록 주소" = "Unregistered Address";
 "주소로 이동하기" = "Search the address to fly to";
@@ -73,3 +72,12 @@
 "부상" = "Got Hurt";
 "행사" = "Event";
 "놀거리" = "Play";
+"미등록" = "Unregistered";
+"여기에 블로그 작성 📷" = "Blog This Spot 📷";
+"네트워크 문제" = "Network Problem";
+"네트워크 연결 상황이 좋지 않습니다. 이 경우 에임 태그가 정상적으로 작동하지 않습니다." = "Network Connection is not in good condition. In this case, the aim tag does not work.";
+"좋지 않은 네트워크 상황" = "Bad Network" ;
+"네트워크가 느릴 경우 에임 태그가 지연되어 설치될 수 있습니다 🎯" = "Slow Network could delay setting of Aim Tag 🎯";
+"네트워크 오류" = "Network Error" ;
+"네트워크가 연결되어있지 않습니다. 이 경우 태그가 정상적으로 작동하지 않습니다." = "Network is not connected. In this case, most of features on map might not work.";
+"위치에 대한 주소를 검색 중..." = "Searching for the Address ..." ;

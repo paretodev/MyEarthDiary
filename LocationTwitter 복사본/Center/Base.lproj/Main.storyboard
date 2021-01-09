@@ -81,6 +81,25 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나의 위치 잡는 중" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMW-gj-8z4">
+                                        <rect key="frame" x="99.5" y="0.0" width="116" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="GPt-5N-M3F">
+                                        <rect key="frame" x="225.5" y="0.5" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="GPt-5N-M3F" secondAttribute="height" multiplier="1:1" id="EJV-oy-VcK"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="GSO-Tp-dmx">
+                                        <rect key="frame" x="150" y="137" width="15" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="BG7-O2-Yem"/>
+                                            <constraint firstAttribute="width" constant="15" id="qQ5-1M-xzR"/>
+                                        </constraints>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -88,16 +107,23 @@
                                     <constraint firstItem="fHJ-gZ-DWb" firstAttribute="leading" secondItem="Oam-bw-kG4" secondAttribute="leading" id="5SR-W6-EhG"/>
                                     <constraint firstAttribute="trailing" secondItem="fHJ-gZ-DWb" secondAttribute="trailing" id="9BI-pH-lfv"/>
                                     <constraint firstItem="UKP-dz-2fX" firstAttribute="top" secondItem="yEY-kT-2A8" secondAttribute="bottom" constant="12" id="FXd-pX-bSL"/>
+                                    <constraint firstItem="GSO-Tp-dmx" firstAttribute="centerX" secondItem="QeL-vr-9eC" secondAttribute="centerX" id="Gmh-vZ-jIE"/>
                                     <constraint firstItem="yEY-kT-2A8" firstAttribute="top" secondItem="fHJ-gZ-DWb" secondAttribute="bottom" constant="15" id="HTc-Sl-Yhv"/>
                                     <constraint firstItem="A4N-dz-JfN" firstAttribute="leading" secondItem="Oam-bw-kG4" secondAttribute="leading" id="Knp-W7-sOl"/>
+                                    <constraint firstItem="GPt-5N-M3F" firstAttribute="height" secondItem="ZMW-gj-8z4" secondAttribute="height" multiplier="0.952381" id="MFn-Ce-UMR"/>
+                                    <constraint firstItem="ZMW-gj-8z4" firstAttribute="top" secondItem="Oam-bw-kG4" secondAttribute="top" id="UXA-Ao-1W6"/>
                                     <constraint firstItem="QeL-vr-9eC" firstAttribute="leading" secondItem="Oam-bw-kG4" secondAttribute="leading" id="VSJ-oW-jvu"/>
                                     <constraint firstItem="QeL-vr-9eC" firstAttribute="top" secondItem="UKP-dz-2fX" secondAttribute="bottom" constant="25" id="VVi-b4-V7C"/>
                                     <constraint firstAttribute="trailing" secondItem="UKP-dz-2fX" secondAttribute="trailing" id="ZyY-qg-hyi"/>
                                     <constraint firstAttribute="bottom" secondItem="A4N-dz-JfN" secondAttribute="bottom" id="aof-8l-GJN"/>
                                     <constraint firstItem="0DN-dK-bwZ" firstAttribute="top" secondItem="Tb9-Jl-Cem" secondAttribute="bottom" constant="12" id="d96-xg-FZ8"/>
+                                    <constraint firstItem="GPt-5N-M3F" firstAttribute="centerY" secondItem="ZMW-gj-8z4" secondAttribute="centerY" id="dhG-lm-Ujf"/>
                                     <constraint firstItem="UKP-dz-2fX" firstAttribute="leading" secondItem="0DN-dK-bwZ" secondAttribute="trailing" constant="10" id="fq7-oe-Kls"/>
                                     <constraint firstItem="QeL-vr-9eC" firstAttribute="top" secondItem="0DN-dK-bwZ" secondAttribute="bottom" constant="25" id="get-2b-Ep2"/>
+                                    <constraint firstItem="GPt-5N-M3F" firstAttribute="leading" secondItem="ZMW-gj-8z4" secondAttribute="trailing" constant="10" id="hWj-x8-Czz"/>
                                     <constraint firstItem="Tb9-Jl-Cem" firstAttribute="leading" secondItem="Oam-bw-kG4" secondAttribute="leading" id="kvu-Cj-x1T"/>
+                                    <constraint firstItem="ZMW-gj-8z4" firstAttribute="centerX" secondItem="Oam-bw-kG4" secondAttribute="centerX" id="lXD-r0-kWW"/>
+                                    <constraint firstItem="GSO-Tp-dmx" firstAttribute="top" secondItem="QeL-vr-9eC" secondAttribute="bottom" constant="2" id="mvc-Nz-yPj"/>
                                     <constraint firstAttribute="trailing" secondItem="A4N-dz-JfN" secondAttribute="trailing" id="oQy-Xb-cfJ"/>
                                     <constraint firstItem="Tb9-Jl-Cem" firstAttribute="top" secondItem="fHJ-gZ-DWb" secondAttribute="bottom" constant="15" id="qNU-e8-XlO"/>
                                     <constraint firstAttribute="trailing" secondItem="yEY-kT-2A8" secondAttribute="trailing" id="sfq-Zx-iug"/>
@@ -137,7 +163,10 @@
                         <outlet property="WriteBlogButton" destination="A4N-dz-JfN" id="6QQ-Rz-wgk"/>
                         <outlet property="addressLabel" destination="QeL-vr-9eC" id="jRj-iA-F7U"/>
                         <outlet property="containerView" destination="Oam-bw-kG4" id="8qY-kk-kvQ"/>
+                        <outlet property="coordinateButAddressIndicator" destination="GSO-Tp-dmx" id="eCx-bO-nYh"/>
                         <outlet property="getLocationButton" destination="WF0-R0-vht" id="odN-yu-kEy"/>
+                        <outlet property="indicatorLabel" destination="ZMW-gj-8z4" id="LTb-KT-Gqb"/>
+                        <outlet property="indicatorView" destination="GPt-5N-M3F" id="fTE-nt-XGE"/>
                         <outlet property="latitudeValueLabel" destination="yEY-kT-2A8" id="sLA-UC-hVI"/>
                         <outlet property="messageLabel" destination="fHJ-gZ-DWb" id="rEW-Tl-GyD"/>
                     </connections>
@@ -532,7 +561,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장소 이름" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3y-6r-Mpm">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="장소 이름" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3y-6r-Mpm">
                                 <rect key="frame" x="0.0" y="90.5" width="375" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -544,10 +573,10 @@
                         <constraints>
                             <constraint firstItem="9mQ-GG-hIv" firstAttribute="centerX" secondItem="NFd-8d-ED0" secondAttribute="centerX" id="18K-0w-I9w"/>
                             <constraint firstItem="9mQ-GG-hIv" firstAttribute="leading" secondItem="X9f-kl-M4r" secondAttribute="leading" id="Foa-P0-Xdg"/>
-                            <constraint firstItem="9mQ-GG-hIv" firstAttribute="top" secondItem="N3y-6r-Mpm" secondAttribute="bottom" constant="35" id="JAG-33-dx3"/>
+                            <constraint firstItem="9mQ-GG-hIv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="N3y-6r-Mpm" secondAttribute="bottom" constant="10" id="JAG-33-dx3"/>
                             <constraint firstItem="9mQ-GG-hIv" firstAttribute="centerY" secondItem="NFd-8d-ED0" secondAttribute="centerY" id="Wnd-gc-JTR"/>
                             <constraint firstItem="X9f-kl-M4r" firstAttribute="trailing" secondItem="9mQ-GG-hIv" secondAttribute="trailing" id="aTp-D5-enq"/>
-                            <constraint firstItem="N3y-6r-Mpm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="X9f-kl-M4r" secondAttribute="top" constant="20" id="kQ0-Xj-MBQ"/>
+                            <constraint firstItem="N3y-6r-Mpm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="X9f-kl-M4r" secondAttribute="top" constant="10" id="kQ0-Xj-MBQ"/>
                             <constraint firstItem="N3y-6r-Mpm" firstAttribute="leading" secondItem="X9f-kl-M4r" secondAttribute="leading" id="pXe-Yw-qmh"/>
                             <constraint firstItem="X9f-kl-M4r" firstAttribute="trailing" secondItem="N3y-6r-Mpm" secondAttribute="trailing" id="q7d-RR-GnL"/>
                         </constraints>
@@ -656,7 +685,7 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iuY-nL-eyP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iuY-nL-eyP">
                                 <rect key="frame" x="16" y="86" width="343" height="180"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -726,10 +755,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addressSearchBar" destination="Vqz-Zv-8Wp" id="rM2-I6-7rL"/>
-                        <outlet property="autoCompleteTableView" destination="iuY-nL-eyP" id="bOF-YG-dxo"/>
+                        <outlet property="addressSearchBar" destination="Vqz-Zv-8Wp" id="ZEy-Ez-cZs"/>
+                        <outlet property="autoCompleteTableView" destination="iuY-nL-eyP" id="FI6-Wv-CCF"/>
                         <outlet property="mapView" destination="HkC-qr-weY" id="ell-an-EJn"/>
-                        <outlet property="mapViewContentView" destination="H0w-C0-lan" id="VI9-SH-rFU"/>
+                        <outlet property="mapViewContentView" destination="H0w-C0-lan" id="PXK-UD-yIT"/>
                         <outlet property="toolBar" destination="EXj-fh-zsh" id="Zns-nL-Pzh"/>
                         <segue destination="nuO-XY-Kz2" kind="show" identifier="EditLocation" id="RRE-3Q-zSr"/>
                         <segue destination="nuO-XY-Kz2" kind="show" identifier="AddLocation" id="ZNY-lP-TWH"/>
@@ -761,7 +790,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Kfj-I5-v9k"/>
+        <segue reference="YER-tk-9nt"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="compass" width="21.5" height="21.5"/>

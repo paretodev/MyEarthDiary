@@ -22,24 +22,34 @@
 
 <br>
 
-1. **앱이 해결하고자 한 문제**
+1. **앱이 해결하고자 한 문제**<br>
+
    1. 니즈
    2. 나의 솔루션
-2. **개발 기본 정보**
+
+2. **개발 기본 정보**<br>
+
    1. 프레임워크 / 오픈 소스(라이센스)
-3. **앱 성능 최적화 & 안정화를 위한 히스토리**
+
+3. **앱 성능 최적화 & 안정화를 위한 히스토리**<br>
+   <br>
+   **ver 0.3 🏷**
+
    1. 멀티스레딩을 이용한, 지도뷰 에임 태그( Address Aim Tag )기능 성능 최적화 & 안정화
-   2. 유저 위치 추적 기능 안정화, 유한 상태 머신 벤치 마킹
-   3. ??문제
-4. **새로 배운 지식 정리**
+   2. Core Location 에러 핸들링 최적화, 유한 상태 머신 아이디어 응용<br>
+
+4. **새로 배운 지식 정리**<br>
+
    1. iOS 관련
    2. 스위프트 관련
    3. Design Pattern 관련
    4. 오픈 소스 관련
-   5. 컴퓨터 사이언스 지식 응용
-5. **비하인드 스토리**
+   5. 컴퓨터 사이언스 지식 응용<br>
+
+5. **비하인드 스토리**<br>
+
    1. 심사 피드백
-   2. 개선
+   2. 개선<br>
 
 <br>
 <br>
@@ -364,18 +374,19 @@ DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 <br>
 <br>
 
-## 문제2. Location Manager를 활용한, 유저 좌표(및 주소) 추적 기능 안정화( = 유한 상태 머신 )
+## 문제2. Location Manager를 활용한, 유저 좌표(및 주소) 추적 기능 안정성 최적화( = 유한 상태 머신 아이디어 응용 )
 
-<br>
-
-![](./images/6.gif)
 <br>
 
 Core Location 프레임워크의 Core Location Manager 객체를 통해, 현재 유저의 좌표를 원하는 정확도( 추정 오차 범위 : x 미터 이내 )로 가져오는 작업에는 총 6가지의 상태(State)가 있다는 것을 알게되었습니다. 각 케이스별로 업데이트 해야할 버튼, 경우에 따라 발생시킬 alert창 들이 너무 다양했고. 코드를 짜기가 매우 복잡했습니다. 이때 생각난 게, **논리 설계** 시간에 배웠던 **유한 상태 기계** 였습니다. <br>
 **유한 상태 기계** 는 컴퓨터의 작은 부품들과 기계의 기초가 되는 기계에 대한 개념인데, 어떠한 기계가 가진 각종 상태들이 오직 몇 비트의 입력 이 바뀜으로 인해 일정한 흐름으로 변하는 것이었습니다. 겉으로 보기에는 매우 복잡한 변화가 일어나는 것 처럼 보이지만, 그 기계 속에서는 오직 3-4 비트의 입력만이 변하고 있었던 것입니다. <br>
 뭔가 이 많은 라벨, 앨러트 창,버튼의 가시성 등 겉으로 활발히 변하고 있는 것들도, 결국 기저에서는 6가지 가능한 상태가 변하는 것에 불과하니, `state = .beforePress` 상태라는 변수에, `.(상태_종류_중_하나의_값)`를 지정(assign)해주는 것만으로, 간단하게 타이밍에 맞게 UI 요소들을 업데이트 해주면 빠트리는 것 없이 위 스크린의 흐름을 만들 수 있을 것이라고 생각했습니다. 위와 같은 작동을 위해, state 변수에 대해서, property observer인 `didSet`을 사용하였습니다.
 
-### 이 방식을 통해, 간편하게 커버하지 못하는 경우의 수 없이, 라벨, 버튼, 알러트 창을 일괄적으로 컨트롤 할 수 있었습니다.
+### 이 방식을 통해, 간편하게 커버하지 못하는 경우의 수 없이, 라벨, 버튼, 알러트 창을 일괄적으로 컨트롤 할 수 있었습니다. ( 이하, 지연이 심한 네트워크, 네트워크 연결 없는 상황 test )
+
+<br>
+
+![](./images/7.gif)
 
 <br>
 
@@ -407,7 +418,6 @@ enum CurrentLocationState {
 // addressLabelText
 // blogLabelisHidden
 // getLocationButtonTitle
-
 enum CurrentLocationState {
     //
     case beforePress, updatingLoc, completeLoc, unknownTill6, unknownToFail, locSerDeniedDetected
@@ -435,7 +445,7 @@ enum CurrentLocationState {
             case .updatingLoc:
                 return "아직 위치가 확정되지 않았습니다".localized()
             case .completeLoc:
-                return "아직 위치가 확정되지 않았습니다".localized() //🍎 지오 코딩된 실제 주소를 넣기
+                return "위치에 대한 주소를 검색 중...".localized() //🍎 지오 코딩된 실제 주소를 넣기
             case .unknownTill6:
                 return "아직 위치가 확정되지 않았습니다".localized()
             case .unknownToFail:
@@ -468,41 +478,42 @@ enum CurrentLocationState {
 }
 ```
 
-이렇게 Enumeration Type을 정의하고, currentLocationState 변수의 didSet(속성 옵저버)에는 각 Enumeration 값이 가지는 computed property값이 지정되게 논리를 짰습니다.
+이렇게 Enumeration 타입을 정의하고, 뷰 컨트롤러의 currentLocationState 변수에는 didSet을 통해 속성 옵저버를 설치하여, 새로 바뀌는 상태만 지정해 주면, 그것들이 가지고 있는 computed property값들이 여러 라벨을 업데이트하는 논리를 짰습니다.
 
 ```swift
-    var currentLocationState : CurrentLocationState? {
-        didSet {
-            // Defensive
-            if  !( [ CurrentLocationState.unknownTill6 , CurrentLocationState.updatingLoc ].contains(currentLocationState) ){
-                self.stopIndicator()
-            }
-            //
-            configureLabel()
-            //
-            if currentLocationState == CurrentLocationState.completeLoc && performingGeocoding == false{
-                let onceConfirmedLocation = location!
-                performingGeocoding = true
-                geoCoder.reverseGeocodeLocation( onceConfirmedLocation ){ placemarks, error in
-                    if let placemarks = placemarks {
-                        let responsePlacemark = placemarks.last!
-                        if self.currentLocationState == CurrentLocationState.completeLoc {
-                            self.currentPlacemark = responsePlacemark
-                            self.addressLabel.text = string(from: self.currentPlacemark!)
-                            self.WriteBlogButton.isHidden = false
-                            self.playSoundEffect()
-                        }
+var currentLocationState : CurrentLocationState? {
+    didSet {
+        configureLabel()
+        if currentLocationState == CurrentLocationState.completeLoc && performingGeocoding == false{
+            let onceConfirmedLocation = location!
+            performingGeocoding = true
+            startCoordinateButAddressIndicator()
+            geoCoder.reverseGeocodeLocation( onceConfirmedLocation ){ placemarks, error in
+                if let placemarks = placemarks {
+                    let responsePlacemark = placemarks.last!
+                    if self.currentLocationState == CurrentLocationState.completeLoc {
+                        self.currentPlacemark = responsePlacemark
+                        self.stopCoordinateButAddressIndicator()
+                        self.addressLabel.text = string(from: self.currentPlacemark!)
+                        self.WriteBlogButton.isHidden = false
+                        self.playSoundEffect()
                     }
-                    else {
-                        self.makeAlert( withTitle: "에러".localized(), withContents: "인터넷이 연결되어 있지 않거나, 조회가 되지 않는 주소입니다.".localized() )
-                        self.currentLocationState = CurrentLocationState.beforePress
-                    }
-                    self.performingGeocoding = false
                 }
+                else {
+                    self.stopCoordinateButAddressIndicator()
+                    self.makeAlert( withTitle: "에러".localized(), withContents: "인터넷이 연결되어 있지 않거나, 조회가 되지 않는 주소입니다.".localized() )
+                    self.currentLocationState = CurrentLocationState.beforePress
+                }
+                self.performingGeocoding = false
             }
         }
     }
+}
 ```
 
-&nbsp;&nbsp;이 방식을 통해, Location Manager를 통해 위치 정보를 받아와 표시하는 과정에서 생길 수 있는, 경우의 수에 맞게, state = .상태를 지정해주는 것만으로도, UI요소를 일괄적으로 핸들링할 수 있었습니다.
-상황에 맞게 메시지 라벨, 앨러트 창을 빠짐없이 통제할 수 있으면, 유저가 `앱이 현재 어떤 상황인지 정확히 인지`하고, 위치 업데이트가 진행 중이니 기다리거나, 인터넷 연결을 한 번더 확인하거나 정확한 피드백을 받을 수 있습니다.
+&nbsp;&nbsp; 예외 적인 케이스와 정상적인 케이스에서 발생 가능한 모든 상태(6가지)에 대하여 정의하고, **Enumeration** 자료형을 이용하여, 각 상태에서 산출될 라벨 내용물을 **computed property**를 통해 타입 정의에 포함 시킴으로서 :
+
+1. 유저는 (특히 여행 상황의 경우 더 흔한) 네트워크 환경에서 앱을 사용하면서, 가시적으로, 앱에서 단계가 실행되고 있는지 파악할 수 있고, 어떤 조치를 취하면 정상적으로 사용할 수 있는 지 파악할 수 있습니다.
+2. 개발 측면에서는, 원래 같은 경우, 분산되어 있을 라벨 업데이트를 Enum타입 정의 부분에서만 업데이트 하면 되기 때문에, 유지 보수에 있어, 더 효율성을 얻을 수 있습니다.
+
+---
