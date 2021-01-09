@@ -81,6 +81,25 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나의 위치 잡는 중" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMW-gj-8z4">
+                                        <rect key="frame" x="99.5" y="0.0" width="116" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="GPt-5N-M3F">
+                                        <rect key="frame" x="225.5" y="0.5" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="GPt-5N-M3F" secondAttribute="height" multiplier="1:1" id="EJV-oy-VcK"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="GSO-Tp-dmx">
+                                        <rect key="frame" x="150" y="137" width="15" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="BG7-O2-Yem"/>
+                                            <constraint firstAttribute="width" constant="15" id="qQ5-1M-xzR"/>
+                                        </constraints>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -88,16 +107,23 @@
                                     <constraint firstItem="fHJ-gZ-DWb" firstAttribute="leading" secondItem="Oam-bw-kG4" secondAttribute="leading" id="5SR-W6-EhG"/>
                                     <constraint firstAttribute="trailing" secondItem="fHJ-gZ-DWb" secondAttribute="trailing" id="9BI-pH-lfv"/>
                                     <constraint firstItem="UKP-dz-2fX" firstAttribute="top" secondItem="yEY-kT-2A8" secondAttribute="bottom" constant="12" id="FXd-pX-bSL"/>
+                                    <constraint firstItem="GSO-Tp-dmx" firstAttribute="centerX" secondItem="QeL-vr-9eC" secondAttribute="centerX" id="Gmh-vZ-jIE"/>
                                     <constraint firstItem="yEY-kT-2A8" firstAttribute="top" secondItem="fHJ-gZ-DWb" secondAttribute="bottom" constant="15" id="HTc-Sl-Yhv"/>
                                     <constraint firstItem="A4N-dz-JfN" firstAttribute="leading" secondItem="Oam-bw-kG4" secondAttribute="leading" id="Knp-W7-sOl"/>
+                                    <constraint firstItem="GPt-5N-M3F" firstAttribute="height" secondItem="ZMW-gj-8z4" secondAttribute="height" multiplier="0.952381" id="MFn-Ce-UMR"/>
+                                    <constraint firstItem="ZMW-gj-8z4" firstAttribute="top" secondItem="Oam-bw-kG4" secondAttribute="top" id="UXA-Ao-1W6"/>
                                     <constraint firstItem="QeL-vr-9eC" firstAttribute="leading" secondItem="Oam-bw-kG4" secondAttribute="leading" id="VSJ-oW-jvu"/>
                                     <constraint firstItem="QeL-vr-9eC" firstAttribute="top" secondItem="UKP-dz-2fX" secondAttribute="bottom" constant="25" id="VVi-b4-V7C"/>
                                     <constraint firstAttribute="trailing" secondItem="UKP-dz-2fX" secondAttribute="trailing" id="ZyY-qg-hyi"/>
                                     <constraint firstAttribute="bottom" secondItem="A4N-dz-JfN" secondAttribute="bottom" id="aof-8l-GJN"/>
                                     <constraint firstItem="0DN-dK-bwZ" firstAttribute="top" secondItem="Tb9-Jl-Cem" secondAttribute="bottom" constant="12" id="d96-xg-FZ8"/>
+                                    <constraint firstItem="GPt-5N-M3F" firstAttribute="centerY" secondItem="ZMW-gj-8z4" secondAttribute="centerY" id="dhG-lm-Ujf"/>
                                     <constraint firstItem="UKP-dz-2fX" firstAttribute="leading" secondItem="0DN-dK-bwZ" secondAttribute="trailing" constant="10" id="fq7-oe-Kls"/>
                                     <constraint firstItem="QeL-vr-9eC" firstAttribute="top" secondItem="0DN-dK-bwZ" secondAttribute="bottom" constant="25" id="get-2b-Ep2"/>
+                                    <constraint firstItem="GPt-5N-M3F" firstAttribute="leading" secondItem="ZMW-gj-8z4" secondAttribute="trailing" constant="10" id="hWj-x8-Czz"/>
                                     <constraint firstItem="Tb9-Jl-Cem" firstAttribute="leading" secondItem="Oam-bw-kG4" secondAttribute="leading" id="kvu-Cj-x1T"/>
+                                    <constraint firstItem="ZMW-gj-8z4" firstAttribute="centerX" secondItem="Oam-bw-kG4" secondAttribute="centerX" id="lXD-r0-kWW"/>
+                                    <constraint firstItem="GSO-Tp-dmx" firstAttribute="top" secondItem="QeL-vr-9eC" secondAttribute="bottom" constant="2" id="mvc-Nz-yPj"/>
                                     <constraint firstAttribute="trailing" secondItem="A4N-dz-JfN" secondAttribute="trailing" id="oQy-Xb-cfJ"/>
                                     <constraint firstItem="Tb9-Jl-Cem" firstAttribute="top" secondItem="fHJ-gZ-DWb" secondAttribute="bottom" constant="15" id="qNU-e8-XlO"/>
                                     <constraint firstAttribute="trailing" secondItem="yEY-kT-2A8" secondAttribute="trailing" id="sfq-Zx-iug"/>
@@ -137,7 +163,10 @@
                         <outlet property="WriteBlogButton" destination="A4N-dz-JfN" id="6QQ-Rz-wgk"/>
                         <outlet property="addressLabel" destination="QeL-vr-9eC" id="jRj-iA-F7U"/>
                         <outlet property="containerView" destination="Oam-bw-kG4" id="8qY-kk-kvQ"/>
+                        <outlet property="coordinateButAddressIndicator" destination="GSO-Tp-dmx" id="eCx-bO-nYh"/>
                         <outlet property="getLocationButton" destination="WF0-R0-vht" id="odN-yu-kEy"/>
+                        <outlet property="indicatorLabel" destination="ZMW-gj-8z4" id="LTb-KT-Gqb"/>
+                        <outlet property="indicatorView" destination="GPt-5N-M3F" id="fTE-nt-XGE"/>
                         <outlet property="latitudeValueLabel" destination="yEY-kT-2A8" id="sLA-UC-hVI"/>
                         <outlet property="messageLabel" destination="fHJ-gZ-DWb" id="rEW-Tl-GyD"/>
                     </connections>
@@ -761,7 +790,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Kfj-I5-v9k"/>
+        <segue reference="YER-tk-9nt"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="compass" width="21.5" height="21.5"/>

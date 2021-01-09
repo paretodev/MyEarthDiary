@@ -93,12 +93,15 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             if !self.initialAimTagSet && !self.hasNoticedNetworkAimTagIssue && !self.noticedSlowNetwork {
                 print("Satisfied Condition")
-                let alertController = makeAlert(withTitle: "좋지 않은 네트워크 상황".localized() , withContents: "네트워크가 느릴 경우 에임 태그가 지연되어 설치될 수 있습니다 🎯".localized())
-                self.present(alertController, animated: true, completion: nil)
+                let alert = makeAlert(withTitle: "좋지 않은 네트워크 상황".localized() , withContents: "네트워크가 느릴 경우 에임 태그가 지연되어 설치될 수 있습니다 🎯".localized())
+                let action = UIAlertAction(title: "확인".localized(), style: .default){_ in
+                    alert.removeFromParent()
+                }
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
                 self.noticedSlowNetwork = true
             }
         }
-        //
     }
 
   // MARK: - Navigation
@@ -378,11 +381,11 @@ self.geoCoder.reverseGeocodeLocation(  CLLocation(latitude: nowLat, longitude: n
     if let _ = error {
         if !self.hasNoticedNetworkAimTagIssue{
             DispatchQueue.main.async {
-                let alert = makeAlert(withTitle: "네트워크 오류".localized() , withContents: "네트워크가 연결되어있지 않습니다. 이 경우 태그가 정상적으로 작동하지 않습니다.".localized())
-                let action = UIAlertAction(title: "확인".localized(), style: .default, handler: {_ in
+                let alert = UIAlertController(title: "네트워크 오류".localized(), message: "네트워크가 연결되어있지 않습니다. 이 경우 태그가 정상적으로 작동하지 않습니다.".localized(), preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인".localized(), style: .default){_ in
                     alert.removeFromParent()
-                })
-                alert.addAction( action )
+                }
+                alert.addAction(action)
                 self.present(alert, animated: true, completion: nil)
             }
             self.hasNoticedNetworkAimTagIssue = true // 1회만 공지
@@ -533,9 +536,7 @@ extension MapViewController {
             searchAnnoation.title = targetLocationMapItem.name
             searchAnnoation.subtitle = string(from: targetLocationMapItem.placemark)
             self.currentSearchedAnnotation = searchAnnoation
-            //
             self.mapView.addAnnotation(searchAnnoation)
-            //
             self.setRegion(on: targetLocationMapItem.placemark.coordinate )
             //
         }
