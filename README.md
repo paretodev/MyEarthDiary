@@ -9,6 +9,10 @@
 <br>
 <br>
 
+![](./images/2021-01-09-10-55-43.png)
+<br>
+<br>
+
 - 한글 & 영문 지원
 - iOS12.0 ~ 지원
   <br>
@@ -256,10 +260,95 @@ self.geoCoder.reverseGeocodeLocation(  CLLocation(latitude: nowLat, longitude: n
 ![](./images/5.gif)
 <br>
 
-이 경우, 유저는 어떤 상황인지 모르고, 중간 이탈 할 수도 있습니다. 이 경우, 유저가 정확하게 상황을 인지하기 위해, 지연 이유에 대하여 1회에 한 해 alert창을 띄울 필요가 있습니다.
+이 경우, 유저는 어떤 상황인지 모르고, 중간 이탈 할 수도 있습니다. 여러 번 사용해본 결과, 유저가 앱이 고장났나 하고 의심하게 되어 불편해하기 시작하는 시점이 3초 이상부터였습니다.**심지어 앱이 데이터 연결 조건이 좋지 않은 경우가 많은 해외 여행 중을 타겟팅하기 때문에 이러한 핸들링이 더 중요했습니다.**
+
 <br>
 
-![](./images/2021-01-09-01-03-01.png)
+3초 이상 에임 태그가 설치가 안 될 경우, 유저가 정확하게 상황을 인지하기 위해, 지연 이유에 대하여 1회에 한 해 alert창을 띄울 필요가 있었습니다.
+<br>
+![](./images/2021-01-09-10-12-23.png)
+
 <br>
 
-이에 대응하기 위해, 다음의 작업을 메인큐에 다시 비동기로 스케쥴링 했습니다. :<br> { ⭐️ 유저에게 어떤 이유로 에임 태그가 3초 이상 경과 후 발생하지 않으면, 처음 1회에 한 해서, Alert 창을 띄웁니다. "현재 네트워크 속도가 느립니다. 이런 상황에서는, 에임 태그 설치가 지연되어 이루어질 수 있습니다." 유저는 일정텀 동안 에임 태그가 나타나지 않는 것에 대해, 올바른 조치를 취할 수 있습니다.}<br>
+이와 같이 대응하기 위해, 다음과 같은 코드를 뷰가 나타난 후 실행되는 **viewDidAppear** 함수에 hook하였습니다.
+
+<br>
+
+```swift
+    override func viewDidAppear(_ animated: Bool) {
+        //MARK:- First Update Starts
+            // 3초 후에 비동기 스케줄링
+        print("View Did Appear and scheduled")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            if !self.initialAimTagSet && !self.hasNoticedNetworkAimTagIssue && !self.noticedSlowNetwork {
+                print("Satisfied Condition")
+                let alertController = makeAlert(withTitle: "좋지 않은 네트워크 상황".localized() , withContents: "네트워크가 느릴 경우 에임 태그가 지연되어 설치될 수 있습니다 🎯".localized())
+                self.present(alertController, animated: true, completion: nil)
+                self.noticedSlowNetwork = true
+            }
+        }
+        //
+    }
+```
+
+1. GCD님, View가 스크린에 등장할 때를 기점으로 다음의 { } 클로저 블록을, 현 시점으로 부터, 3초 후에 **메인 쓰레드에 비동기 방식**으로 스케쥴 해주세요.
+2. 클로저 블록 : { 만약 뷰가 스크린에 등장한 이래로 3초가 지난 시점까지, 1). 첫 에임 태그가 설치되어있지 않고 2). 네트워크가 아예 연결되어 있지 않은 경우가 아니고( 이때는 네트워크가 연결되어 있지 않다는 알러트 창을 띄울 로직이 다른 곳에 이미 있으므로) 3). 앱 실행 후 Slow Network가 에임 태그를 지연시킬 수 있다는 알러트 창을 이전에 띄운 적이 없을 경우에 한해서 "네트워크가 느릴 경우 에임 태그가 지연되어 설치될 수 있습니다 🎯" 라는 알러트 창을 띄울 것 }
+   <br>
+   <br>
+
+## Q : 왜 DispatchQueue.main.asyncAfter(deadline : .now() + 3){ block } 인거지 ?
+
+<br>
+
+처음엔 그저 우와, 3초 후에 알러트 창을 띄워주네 하고 마냥 즐거웠습니다. <br>
+
+하지만, 다음의 의문이 들기 시작했습니다. <br>
+
+**1). 꼭 메인 큐에 해야할까? 글로벌 큐에서 하는 건 어떤데?**<br>
+**2). 왜 .async 비동기로 스케줄링 하지? 이거 UI를 블록하는 무거운 작업도 아닌 데? 그냥 main.sync하면 안 되나?**
+
+<br>
+
+### **1), 2)번을 대답하기 위한 리서치 :** [참고 사이트](https://zeddios.tistory.com/519)
+
+<br>
+
+1. UIApplication 인스턴스가 메인 쓰레드에 attached 되어 있다.
+2. UIEvent(터치, 핀치, 스와이프 등등)는 다음의 Responder Chain( 반응 체인을 )을 따라 UIResponder까지 전달 : <br><br>
+   &nbsp;&nbsp;1. **UIApplication** : 앱의 런루프, 메인 이벤트 루프 설정 + 앱 실행, 앱 메인 이벤트 처리 담당, 유저 상호작용 이벤트를 체인에 따라 전달~ 전달~ 하는 출발점<br>
+   &nbsp;&nbsp;2. UIWindow.<br>
+   &nbsp;&nbsp;3. UIController.<br>
+   &nbsp;&nbsp;4. UIView.<br>
+   &nbsp;&nbsp;5. UIView(subview)<br>
+   &nbsp;&nbsp;**6. UIResponder : UIEvent에 따라 인터페이스 변경**<br><br>
+
+3. UI요소에 대한 접근과 조작은 UIApp이 붙어있는 메인에서 해야한다. UIApp.님이 메인 스레드에서 상주하시기 때문에.
+
+4. `Dispatch.main.sync{ }`의 의미<br>
+   &nbsp;&nbsp;
+   sync : 현재 작업 처리중이던, 1). 큐를 블록하고 2). { } 클로저 안에 정의된 작업이, 작업을 배치한 큐에서 마무리된 후에 다시 3). 큐 블록을 풀고 업무를 재개 하겠다.&nbsp;
+   즉, 메인 스레드에서 `Dispatch.main.sync{ }`를 실행하는 것은 : 1). 우선 메인 스레드에서 진행할 작업을 공급하는 메인 큐를 블록하겠다 2). 그리고 메인 큐에 { } 클로저 작업을 스케줄링 하겠다 ~하는 매우 이상한 상황이 됩니다. 큐가 블록되어, 메인 쓰레드는 업무 중단을 했는데, { }를 또 메인 큐에 스케줄링 한 것입니다.
+   <br>
+   <br>
+
+## 결론 : 그러므로, main.async 방식으로 다음의 작업을 진행하는 것은 합리적인 게 됩니다.
+
+<br>
+
+```swift
+DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            if !self.initialAimTagSet && !self.hasNoticedNetworkAimTagIssue && !self.noticedSlowNetwork {
+                print("Satisfied Condition")
+                let alertController = makeAlert(withTitle: "좋지 않은 네트워크 상황".localized() , withContents: "네트워크가 느릴 경우 에임 태그가 지연되어 설치될 수 있습니다 🎯".localized())
+                self.present(alertController, animated: true, completion: nil)
+                self.noticedSlowNetwork = true
+            }
+```
+
+<br>
+
+- 3초후에, UI처리를 할 수 있는 메인 쓰레드에 작업을 스케줄링 해주는 메인 큐에, { 여전히 에임 주석이 설치되어 있지 않을 경우 -> 네트워크가 느려서 에임 주석 설치에 딜레이가 발생할 수 있다는 작업을 스케줄링 }
+- **단, 스케줄링만 해놓고 메인 스레드 하던 일 계속할 것 !!**
+  <br>
+
+### ~를 통해, 뷰가 등장하고 약 3초 후에 alert창을 성공적으로 띄울 수 있었습니다.
