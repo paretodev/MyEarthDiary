@@ -93,7 +93,7 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             if !self.initialAimTagSet && !self.hasNoticedNetworkAimTagIssue && !self.noticedSlowNetwork {
                 print("Satisfied Condition")
-                let alert = makeAlert(withTitle: "좋지 않은 네트워크 상황".localized() , withContents: "네트워크가 느릴 경우 에임 태그가 지연되어 설치될 수 있습니다 🎯".localized())
+                let alert = UIAlertController(title:  "좋지 않은 네트워크 상황".localized(), message: "네트워크가 느릴 경우 에임 태그가 지연되어 설치될 수 있습니다 🎯".localized(), preferredStyle: .alert)
                 let action = UIAlertAction(title: "확인".localized(), style: .default){_ in
                     alert.removeFromParent()
                 }
