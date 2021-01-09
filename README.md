@@ -35,21 +35,17 @@
    <br>
    **ver 0.3 🏷**
 
-   1. 멀티스레딩을 이용한, 지도뷰 에임 태그( Address Aim Tag )기능 성능 최적화 & 안정화
+   ### 1. 최적화 & 안정화를 위한 노력<br>
+
+   1. 멀티스레딩을 이용한, 지도뷰 에임 태그( Address Aim Tag )기능 성능 최적화 & 안정화<br>
+
    2. Core Location 에러 핸들링 최적화, 유한 상태 머신 아이디어 응용<br>
 
-4. **새로 배운 지식 정리**<br>
+   ### 2. 어려웠던 도전 😓 <br>
 
-   1. iOS 관련
-   2. 스위프트 관련
-   3. Design Pattern 관련
-   4. 오픈 소스 관련
-   5. 컴퓨터 사이언스 지식 응용<br>
+   1. 비교적 복잡한 갤러리 UI 구성을 위한 Contraint 설정<br>
 
-5. **비하인드 스토리**<br>
-
-   1. 심사 피드백
-   2. 개선<br>
+   2. 메모리릭 방지를 위한 방어적 프로그래밍<br>
 
 <br>
 <br>
@@ -516,4 +512,87 @@ var currentLocationState : CurrentLocationState? {
 1. 유저는 (특히 여행 상황의 경우 더 흔한) 네트워크 환경에서 앱을 사용하면서, 가시적으로, 앱에서 단계가 실행되고 있는지 파악할 수 있고, 어떤 조치를 취하면 정상적으로 사용할 수 있는 지 파악할 수 있습니다.
 2. 개발 측면에서는, 원래 같은 경우, 분산되어 있을 라벨 업데이트를 Enum타입 정의 부분에서만 업데이트 하면 되기 때문에, 유지 보수에 있어, 더 효율성을 얻을 수 있습니다.
 
----
+<br>
+<br>
+
+## 2. 기타 어려웠던 도전 😓 <br>
+
+1. **비교적 복잡한 갤러리 UI 구성을 위한 Constraint 설정**<br>
+
+![](./images/8.gif)
+<br>
+
+```swift
+var frame : CGRect = CGRect.zero
+        for index in 0..<locationPhotos.count {
+            // 1.
+            frame.origin.x = locationGalleryScrollView.frame.size.width * CGFloat(index)
+            frame.size = locationGalleryScrollView.frame.size
+            // 2.
+            let  imgView = UIImageView(frame: frame)
+            imgView.layer.cornerRadius = 15
+            imgView.layer.masksToBounds = true
+            imgView.contentMode = .scaleAspectFill
+            imgView.backgroundColor = .white
+            //MARK: - ImageView Generation with Gesture Recognizer Attached
+            imgView.isUserInteractionEnabled = true
+            //
+            let tapGesture = UITapGestureRecognizer(
+                target: self,
+                action: #selector( tapImgView(_:) ) // send ui control involved as a sender - in this case, Recognizer
+            )
+            tapGesture.numberOfTapsRequired = 2
+            imgView.addGestureRecognizer(tapGesture)
+            //MARK: - End of Gesture Recognizer Attachment
+            //MARK:- 이미지 로드 방법 에셋 이름, URL(도큐먼트) 모색
+            if locationPhotos[index] == "noImage" {
+                imgView.image = UIImage( named: locationPhotos[index] )!.resized(withBounds: imgView.bounds.size)
+            }
+            else{
+                let newDirectory = applicationDocumentsDirectory.appendingPathComponent(
+                    "image-\( locationPhotos[index] ).jpg", isDirectory: false )
+                do {
+                    let data = try Data(contentsOf: newDirectory)
+                    imgView.image = UIImage( data: data )?.resized(withBounds: imgView.bounds.size)
+                } catch  {
+                    fatalError()
+                }
+            }
+            // 3.
+            locationGalleryScrollView.addSubview(imgView)
+            // 4.imgView와 슈퍼뷰인 스크롤뷰 사이의 constraint를 프로그램으로 주기
+            imgView.(*참고)translatesAutoresizingMaskIntoConstraints = false
+            locationGalleryScrollView.addConstraint( NSLayoutConstraint(
+                                    item: locationGalleryScrollView!,
+                                    attribute: .width,
+                                    relatedBy: .equal,
+                                    toItem: imgView,
+                                    attribute: .width,
+                                    multiplier: 1.0,
+                                    constant: 0 )
+            )
+                // 높이
+            locationGalleryScrollView.addConstraint( NSLayoutConstraint(
+                                    item: locationGalleryScrollView!,
+                                    attribute: .height,
+                                    relatedBy: .equal,
+                                    toItem: imgView,
+                                    attribute: .height,
+                                    multiplier: 1.0,
+                                    constant: 0 )
+            )
+                // 중앙점
+            let constraint = NSLayoutConstraint(item: imgView, attribute: .centerX, relatedBy: .equal, toItem: locationGalleryScrollView, attribute: .centerX, multiplier: CGFloat(2*index + 1), constant: 0 )
+            locationGalleryScrollView.addConstraint(constraint)
+            let constrainty = NSLayoutConstraint(item: imgView, attribute: .centerY, relatedBy: .equal, toItem: locationGalleryScrollView, attribute: .centerY, multiplier: 1, constant: 0 )
+            locationGalleryScrollView.addConstraint(constrainty)
+        }
+    }
+```
+
+\*(참고 : UIView.translatesAutoResizingMaskIntoConstraints : auto resizing을 이용하는 것이 아니라, auto layout을 사용하여 View의 크기와 위치를 **동적으로 계산** 하려면, 이 프로퍼티를 false로 설정 한 다음, View에 **모호 하지 않고**, **충돌하지 않는** constraint집합을 제공해야 합니다 )
+<br>
+<br>
+
+&nbsp;&nbsp;위의 갤러리 레이아웃은 다음과 같이 해결했습니다. 렌더링할 이미지의 갯수에 따라 사이즈를 확정지어 그 사이즈에 맞게 스크롤뷰를 만들고, 이미지 명단을 이터레이팅하면서, UI Image View를, 스토리보드가 아닌, **코드로 auto layout constraint를 주면서**, scrollview의 프레임 사이즈에 맞게 subview로 더해주는 방식으로 해결할 수 있었습니다. 동시에 타깃-액션 패턴을 이 적용된 탭 제스처 인식 객체를 활용하여, 이미지는 더블 탭을 받을 시에, 포토뷰어(삭제)뷰로 이동할 수 있습니다.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
