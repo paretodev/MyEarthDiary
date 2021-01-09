@@ -27,11 +27,10 @@
    2. 나의 솔루션
 2. **개발 기본 정보**
    1. 프레임워크 / 오픈 소스(라이센스)
-3. **앱 개선을 위한 히스토리**
-   1. ~문제
-   2. ~문제
-   3. ~문제
-   4. ~문제
+3. **앱 성능 최적화 & 안정화를 위한 히스토리**
+   1. 멀티스레딩을 이용한, 지도뷰 에임 태그( Address Aim Tag )기능 성능 최적화 & 안정화
+   2. 유저 위치 추적 기능 안정화, 유한 상태 머신 벤치 마킹
+   3. ??문제
 4. **새로 배운 지식 정리**
    1. iOS 관련
    2. 스위프트 관련
@@ -51,8 +50,9 @@
 
 ### 1). 유저 니즈
 
-```
 코로나 이전에, 저는 여행 가는 것을 좋아했어요. 하지만, 정리와 기록을 잘하는 편이 아니라, 그날 일정이 끝나고, 여행이 끝나고 항상 다음과 같은 불편이 있었죠 :
+
+---
 
 - 이 사진이 어디서 찍은 거였지?
 - 이 때가 어떤 상황이였지? 생각이 안 나네.
@@ -60,8 +60,11 @@
 - 이때 무슨 일이 있었더라?
 - 그때 어떤 경로로 여행했더라?
 
-결론 : 에라 모르겠다 ~ 졸린다 자자!!😪 🛌
-```
+**결론 : 에라 모르겠다 ~ 졸린다 자자!!😪 🛌**
+
+---
+
+<br>
 
 ### 2). 솔루션
 
@@ -186,6 +189,11 @@ self.geoCoder.reverseGeocodeLocation(  CLLocation(latitude: nowLat, longitude: n
 <br>
 
 ```swift
+//...(이상 생략)
+let nowLat = self.mapView.centerCoordinate.latitude
+let nowLong = self.mapView.centerCoordinate.longitude
+        //
+        //MARK: - find placemark for coordinate - background thread schedule
 DispatchQueue.global().async {
     //
     let stdLat = nowLat
@@ -196,11 +204,11 @@ self.geoCoder.reverseGeocodeLocation(  CLLocation(latitude: nowLat, longitude: n
     if let _ = error {
         if !self.hasNoticedNetworkAimTagIssue{
             DispatchQueue.main.async {
-                let alert = makeAlert(withTitle: "네트워크 오류".localized() , withContents: "네트워크가 연결되어있지 않습니다. 이 경우 태그가 정상적으로 작동하지 않습니다.".localized())
-                let action = UIAlertAction(title: "확인".localized(), style: .default, handler: {_ in
+                let alert = UIAlertController(title: "네트워크 오류".localized(), message: "네트워크가 연결되어있지 않습니다. 이 경우 태그가 정상적으로 작동하지 않습니다.".localized(), preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인".localized(), style: .default){_ in
                     alert.removeFromParent()
-                })
-                alert.addAction( action )
+                }
+                alert.addAction(action)
                 self.present(alert, animated: true, completion: nil)
             }
             self.hasNoticedNetworkAimTagIssue = true // 1회만 공지
@@ -352,3 +360,148 @@ DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
   <br>
 
 ### ~를 통해, 뷰가 등장하고 약 3초 후에 alert창을 성공적으로 띄울 수 있었습니다.
+
+<br>
+<br>
+
+## 문제2. Location Manager를 활용한, 유저 좌표(및 주소) 추적 기능 안정화( = 유한 상태 머신 )
+
+<br>
+
+![](./images/6.gif)
+<br>
+
+Core Location 프레임워크의 Core Location Manager 객체를 통해, 현재 유저의 좌표를 원하는 정확도( 추정 오차 범위 : x 미터 이내 )로 가져오는 작업에는 총 6가지의 상태(State)가 있다는 것을 알게되었습니다. 각 케이스별로 업데이트 해야할 버튼, 경우에 따라 발생시킬 alert창 들이 너무 다양했고. 코드를 짜기가 매우 복잡했습니다. 이때 생각난 게, **논리 설계** 시간에 배웠던 **유한 상태 기계** 였습니다. <br>
+**유한 상태 기계** 는 컴퓨터의 작은 부품들과 기계의 기초가 되는 기계에 대한 개념인데, 어떠한 기계가 가진 각종 상태들이 오직 몇 비트의 입력 이 바뀜으로 인해 일정한 흐름으로 변하는 것이었습니다. 겉으로 보기에는 매우 복잡한 변화가 일어나는 것 처럼 보이지만, 그 기계 속에서는 오직 3-4 비트의 입력만이 변하고 있었던 것입니다. <br>
+뭔가 이 많은 라벨, 앨러트 창,버튼의 가시성 등 겉으로 활발히 변하고 있는 것들도, 결국 기저에서는 6가지 가능한 상태가 변하는 것에 불과하니, `state = .beforePress` 상태라는 변수에, `.(상태_종류_중_하나의_값)`를 지정(assign)해주는 것만으로, 간단하게 타이밍에 맞게 UI 요소들을 업데이트 해주면 빠트리는 것 없이 위 스크린의 흐름을 만들 수 있을 것이라고 생각했습니다. 위와 같은 작동을 위해, state 변수에 대해서, property observer인 `didSet`을 사용하였습니다.
+
+### 이 방식을 통해, 간편하게 커버하지 못하는 경우의 수 없이, 라벨, 버튼, 알러트 창을 일괄적으로 컨트롤 할 수 있었습니다.
+
+<br>
+
+```swift
+enum CurrentLocationState {
+    case beforePress, updatingLoc, completeLoc, unknownTill6, unknownToFail, locSerDeniedDetected
+```
+
+1. **beforePress**(any request button) :<br>
+   &nbsp;&nbsp;앱이 시작되고 유저가 어떠한 버튼도 누르지 않은 상태
+2. **updatingLoc**(ation) :<br>
+   &nbsp;&nbsp;**(6초(타임 아웃 기준)가 경과하기 전)** 위치에 대한 업데이트를 로케이션 매니저로부터 1회 이상 받았으나, 코드에서 지정한 정확도에는 도달하지 못한 상태
+3. **completeLoc**(ation) :<br>
+   &nbsp;&nbsp;코드에 지정된 정확도(예시:오차범위 10미터 이내) 이상의 장소 정보 업데이트를 받은 상황
+4. **unknowTill6**(seconds) :<br>
+   &nbsp;&nbsp;위치 추적 요청을 받은 뒤 **6초가 이미 지났고,** 여전히 위치에 대한 업데이트를 한 번도 못받은 상태
+5. **unknownToFail** :<br>
+   &nbsp;&nbsp;인터넷 연결이 없어서, 또는 타임 아웃 기준 **6초**까지 로케이션 매니저로부터 위치 정보 업데이트를 한 번도 못 받은 상황.
+6. **loc(ation)Ser(vice)DeniedDetected** :<br>
+   &nbsp;&nbsp;유저가 위치 서비스를 비활성화한 상태
+   <br>
+   <br>
+
+이 후, Enumeration Data Type값이, 각 상태 값에 맞는 라벨들을 반환할 수 있도록 computed property를 짰습니다.
+
+```swift
+// 업데이트할 라벨, 버튼 종류
+// msgLabelText
+// addressLabelText
+// blogLabelisHidden
+// getLocationButtonTitle
+
+enum CurrentLocationState {
+    //
+    case beforePress, updatingLoc, completeLoc, unknownTill6, unknownToFail, locSerDeniedDetected
+    var msgLabelText : String {
+        switch self {
+        case .beforePress:
+            return "( 나의 위치를 찾아보세요 )".localized()
+        case .updatingLoc:
+            return "위치를 더 정확하게 감지하는 중...".localized()
+        case .completeLoc:
+            return "위치 검색 완료\n정확한 위치에는 셀룰러 데이터📶\n사용이 도움이 됩니다.".localized()
+        case .unknownTill6:
+            return "위치 검색 중...".localized()
+        case .unknownToFail:
+            return "( 위치 검색 실패 )".localized()
+        case .locSerDeniedDetected:
+            return "(위치 서비스가 허용되어 있지 않습니다.)".localized()
+        }
+    }
+    //
+    var addressLabelText : String {
+        switch self {
+            case .beforePress:
+                return "아직 검색된 주소가 없습니다.".localized()
+            case .updatingLoc:
+                return "아직 위치가 확정되지 않았습니다".localized()
+            case .completeLoc:
+                return "아직 위치가 확정되지 않았습니다".localized() //🍎 지오 코딩된 실제 주소를 넣기
+            case .unknownTill6:
+                return "아직 위치가 확정되지 않았습니다".localized()
+            case .unknownToFail:
+                return "아직 검색된 주소가 없습니다.".localized()
+            case .locSerDeniedDetected:
+                return "아직 검색된 주소가 없습니다.".localized()
+        }
+    }
+    //
+    var blogButtonIsHidden : Bool {
+        return true
+    }
+    //
+    var getLocationButtonTitle : String {
+            switch self {
+                case .beforePress:
+                    return "내 위치 가져오기".localized()
+                case .updatingLoc:
+                    return "위치 업데이트 중지".localized()
+                case .completeLoc:
+                    return "내 위치 다시 가져오기".localized()
+                case .unknownTill6:
+                    return "" //🍎  isHidden  = true
+                case .unknownToFail:
+                    return "위치 가져오기 다시 시도".localized()
+                case .locSerDeniedDetected:
+                    return "위치 가져오기 다시 시도".localized()
+            }
+    }
+}
+```
+
+이렇게 Enumeration Type을 정의하고, currentLocationState 변수의 didSet(속성 옵저버)에는 각 Enumeration 값이 가지는 computed property값이 지정되게 논리를 짰습니다.
+
+```swift
+    var currentLocationState : CurrentLocationState? {
+        didSet {
+            // Defensive
+            if  !( [ CurrentLocationState.unknownTill6 , CurrentLocationState.updatingLoc ].contains(currentLocationState) ){
+                self.stopIndicator()
+            }
+            //
+            configureLabel()
+            //
+            if currentLocationState == CurrentLocationState.completeLoc && performingGeocoding == false{
+                let onceConfirmedLocation = location!
+                performingGeocoding = true
+                geoCoder.reverseGeocodeLocation( onceConfirmedLocation ){ placemarks, error in
+                    if let placemarks = placemarks {
+                        let responsePlacemark = placemarks.last!
+                        if self.currentLocationState == CurrentLocationState.completeLoc {
+                            self.currentPlacemark = responsePlacemark
+                            self.addressLabel.text = string(from: self.currentPlacemark!)
+                            self.WriteBlogButton.isHidden = false
+                            self.playSoundEffect()
+                        }
+                    }
+                    else {
+                        self.makeAlert( withTitle: "에러".localized(), withContents: "인터넷이 연결되어 있지 않거나, 조회가 되지 않는 주소입니다.".localized() )
+                        self.currentLocationState = CurrentLocationState.beforePress
+                    }
+                    self.performingGeocoding = false
+                }
+            }
+        }
+    }
+```
+
+이 방식을 통해, Location Manager를 통해 위치 정보를 받아와 표시하는 과정에서 생길 수 있는, 여러 경우의 수에 맞게, UI요소를, 누락 없이 핸들링할 수 있었습니다.
