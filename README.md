@@ -34,13 +34,17 @@
 
 3. **앱 성능 최적화 & 안정화를 위한 히스토리**<br>
    <br>
-   **ver 0.3 🏷**
 
    ### 1. 최적화 & 안정화를 위한 노력<br>
 
    1. 멀티스레딩을 이용한, 지도뷰 에임 태그( Address Aim Tag )기능 성능 최적화 & 안정화<br>
 
-   2. Core Location 에러 핸들링 최적화, 유한 상태 머신 아이디어 응용<br>
+      **ver 1.2에 반영 🏷**
+   
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](./images/2021-01-10-09-10-35.png)
+
+   2. Core Location 에러 핸들링 최적화, 유한 상태 머신 아이디어 응용<br><br>
+   
 
    ### 2. 어려웠던 도전 😓 <br>
 
