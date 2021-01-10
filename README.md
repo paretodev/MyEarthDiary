@@ -39,7 +39,7 @@
 
    1. 멀티스레딩을 이용한, 지도뷰 에임 태그( Address Aim Tag )기능 성능 최적화 & 안정화<br>
 
-      **ver 1.2에 반영 🏷**
+      **ver 1.1에 반영 🏷**
    
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](./images/2021-01-10-09-10-35.png)
 
