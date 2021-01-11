@@ -45,7 +45,8 @@
 
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](./images/2021-01-10-09-10-35.png)
 
-   2. Core Location 에러 핸들링 최적화, 유한 상태 머신 아이디어 응용<br><br>
+
+   1. Core Location 에러 핸들링 최적화, 유한 상태 머신 아이디어 응용<br><br>
 
    ### 2. 어려웠던 도전 😓 <br>
 
@@ -602,3 +603,10 @@ var frame : CGRect = CGRect.zero
 
 &nbsp;&nbsp;위의 갤러리 레이아웃은 다음과 같이 해결했습니다. 렌더링할 이미지의 갯수에 따라 사이즈를 확정지어 그 사이즈에 맞게 스크롤뷰를 만들고, 이미지 명단을 이터레이팅하면서, UI Image View를, 스토리보드가 아닌, **코드로 auto layout constraint를 주면서**, scrollview의 프레임 사이즈에 맞게 subview로 더해주는 방식으로 해결할 수 있었습니다. 동시에 타깃-액션 패턴을 이 적용된 탭 제스처 인식 객체를 활용하여, 이미지는 더블 탭을 받을 시에, 포토뷰어(삭제)뷰로 이동할 수 있습니다.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;
+
+----
+
+버전1.1 
+* indicator view 겹침 버그 수정<br>
+  
+  ![](./images/2021-01-11-09-14-34.png)
