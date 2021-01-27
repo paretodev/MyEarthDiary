@@ -82,7 +82,7 @@ class MapViewController: UIViewController, MKLocalSearchCompleterDelegate, UITab
     autoCompleteTableView.layer.cornerRadius = 5
     //
   }
-
+    //
     override func viewDidAppear(_ animated: Bool) {
         let constraint1 = NSLayoutConstraint(item: self.autoCompleteTableView, attribute: .leading, relatedBy: .equal, toItem: self.addressSearchBar, attribute: .leading, multiplier: 1.0, constant: 0.0)
         let constraint2 = NSLayoutConstraint(item: self.autoCompleteTableView, attribute: .trailing, relatedBy: .equal, toItem: self.addressSearchBar, attribute: .trailing, multiplier: 1.0, constant: 0.0)

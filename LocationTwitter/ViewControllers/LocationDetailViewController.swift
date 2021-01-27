@@ -123,21 +123,13 @@ class LocationDetailViewController: UITableViewController {
         dateLabel.text = {
             return DateFormatter.localizedString(from: date!, dateStyle: .full, timeStyle: .short)
         }( )
-        /*
-         class func localizedString(from date: Date,
-                          dateStyle dstyle: DateFormatter.Style,
-                          timeStyle tstyle: DateFormatter.Style) -> String
-         */
-        //3). Add Location vs. Edit Location Set ups
-            // In Case, it is "add location"
-                // 1. placeholder image
         
-        //MARK: - Only Add
+        //MARK: - Only for Add
         if locationToEdit == nil {
             locationPhotos.append("noImage")
             placeholderSetting()
         }
-        // MARK: - Only Edit
+        // MARK: - Only for  Edit
         else{
             if locationToEdit?.locationTwit == "" {
                 placeholderSetting()
@@ -151,7 +143,7 @@ class LocationDetailViewController: UITableViewController {
         gestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(gestureRecognizer)
         listenForBackgroundNotification()
-        //
+        //MARK:-End of view did load
     }
     
     //MARK:- Reload
@@ -288,7 +280,7 @@ class LocationDetailViewController: UITableViewController {
         if locationPhotos.isEmpty {
             locationPhotos.append("noImage")
         }
-        // Config Start
+        //
         galleryPageControl.numberOfPages = locationPhotos.count
         //
         locationGalleryScrollView.contentSize = CGSize(
@@ -333,10 +325,8 @@ class LocationDetailViewController: UITableViewController {
                     let data = try Data(contentsOf: newDirectory)
                     imgView.image = UIImage( data: data )?.resized(withBounds: imgView.bounds.size)
                 } catch  {
-//                    print("There was no image in the given directory : \(newDirectory.absoluteString)")
                     fatalError()
                 }
-                //
             }
             // 3.
             locationGalleryScrollView.addSubview(imgView)
