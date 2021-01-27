@@ -1,5 +1,4 @@
 # Blog On Map앱 (iOS)
-
 <br>
 
 ![](./images/2021-01-08-10-35-42.png)
@@ -7,19 +6,21 @@
 
 [🔗 블로그 온 맵 - 🍎 App Store 링크](https://apps.apple.com/kr/app/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%98%A8-%EB%A7%B5/id1546232692)
 <br>
-<br>
 
 ![](./images/2021-01-09-10-55-43.png)
 <br>
-<br>
 
 - 한글 & 영문 지원
-- iOS12.0 ~ 지원
-- 협업이 아니라 형상 관리는 로컬에서 진행하였습니다 -> 앞으로 개선 사항 -> 협업 상황에 대한 고려
-![](./images/2021-01-10-09-38-19.png)
+- iOS12.0 (iPhone6까지 지원)
 
-  <br>
-  <br>
+<br>
+
+### 최근 업데이트 21/1/26~ 진행중 
+> ver0.3 🏷
+* 사진 선택 후, 화면 전환 UI 개선
+    *  GCD(멀티스레딩 적용)
+<br>
+<br>
 
 ## Outline
 
@@ -604,9 +605,10 @@ var frame : CGRect = CGRect.zero
 &nbsp;&nbsp;위의 갤러리 레이아웃은 다음과 같이 해결했습니다. 렌더링할 이미지의 갯수에 따라 사이즈를 확정지어 그 사이즈에 맞게 스크롤뷰를 만들고, 이미지 명단을 이터레이팅하면서, UI Image View를, 스토리보드가 아닌, **코드로 auto layout constraint를 주면서**, scrollview의 프레임 사이즈에 맞게 subview로 더해주는 방식으로 해결할 수 있었습니다. 동시에 타깃-액션 패턴을 이 적용된 탭 제스처 인식 객체를 활용하여, 이미지는 더블 탭을 받을 시에, 포토뷰어(삭제)뷰로 이동할 수 있습니다.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;
 
-----
+---------
+__Version History__
 
-버전1.1 
+버전0.2🏷 
 * indicator view 겹침 버그 수정<br>
   
   ![](./images/2021-01-11-09-14-34.png)
