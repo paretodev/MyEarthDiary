@@ -20,7 +20,8 @@
 * 사진 선택 후, 화면 전환 UI 개선
     *  GCD(멀티스레딩 적용).
 * 시야 범위가 넓어졌을 때, 겹치는 핀끼리 클러스터하여, 핀 갯수를 줄이는 기능.
-    *  유저의 메모리 최적화.
+    * 유저의 메모리 최적화.
+    * [참고 자료](https://developer.apple.com/documentation/mapkit/mkannotationview/decluttering_a_map_with_mapkit_annotation_clustering)
 <br>
 <br>
 
